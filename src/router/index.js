@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, postlogin } from '../storages/action/auth';
+import AddRecipe from '../pages/add-recipe';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -56,6 +57,9 @@ function MyTabs({}){
     <Tab.Navigator screenOptions={{headerShown:false}} >
       <Tab.Screen name="Home" component={HomeScreen} options={{
         tabBarIcon: ()=> (<Ionicons name='home' size={30}/>)
+      }}/>
+      <Tab.Screen name="addRecipe" component={AddRecipe} options={{
+        tabBarIcon: ()=> (<Ionicons name='add-outline' size={30}/>)
       }}/>
       <Tab.Screen name="DetailsScreen" component={DetailsScreen} options={{
         tabBarIcon: ()=> (<Ionicons name='apps-outline' size={30}/>)
