@@ -9,30 +9,30 @@ const initialState = {
   modalMessage:{}
 }
 
-export const authReducer = (state=initialState,{type,payload,error}) => {
-  switch (type) {
+export const authReducer = (state = initialState, action) => {
+  switch (action.type) {
     case 'LOGIN_PENDING' || 'REGIST_PENDING':
       console.log('loading...')
       return {
         ...state,isLoading:true
       }
     case 'LOGIN_SUCCESS':
-      console.log(payload)
+      console.log(action)
       return {
         ...state,
-        user: payload.user,
-        accessToken : payload.accessToken,
-        refreshToken: payload.refreshToken,
+        user: action.payload.user,
+        accessToken : action.payload.accessToken,
+        refreshToken: action.payload.refreshToken,
         isLoading:false
       }
     case 'LOGIN_FAILED':
       // console.log(error,'ini error')
       return {
         ...state,
-        error:error.message,
+        error:action.error.message,
         isError:true,
         showModal:true,
-        modalMessage:error.message,
+        modalMessage:action.error.message,
         isLoading:false
       }
     case 'REGIST_SUCCESS':

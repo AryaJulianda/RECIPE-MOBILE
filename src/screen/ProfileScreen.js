@@ -7,6 +7,8 @@ import { ProfileOption } from './ProfileOptionScreen';
 
 import MyRecipeScreen from './MyRecipeScreen.js'
 import EditRecipeScreen from './EditRecipeScreen.js'
+import BookmarkedScreen from './BookmarkedScreen.js'
+import LikedScreen from './LikedScreen.js'
 
 const ProfileStack = createStackNavigator();
 
@@ -69,6 +71,14 @@ function ProfileScreen() {
       <ProfileStack.Screen
         name="MyRecipe"
         component={MyRecipeScreen}
+      />
+      <ProfileStack.Screen
+        name="Bookmarked"
+        component={BookmarkedScreen}
+      />
+      <ProfileStack.Screen
+        name="Liked"
+        component={LikedScreen}
       />
       <ProfileStack.Screen
         name="EditRecipe"

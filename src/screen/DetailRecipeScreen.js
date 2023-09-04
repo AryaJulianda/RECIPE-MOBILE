@@ -4,35 +4,56 @@ import { styles } from '../styles/homeStyle';
 
 import LinearGradient from 'react-native-linear-gradient';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getRecipeById } from '../storage/actions/recipeAction';
+import { useEffect, useState } from 'react';
+import { getRecipeById,addLike, getLikedRecipes } from '../storage/actions/recipeAction';
 
 const DetailRecipeScreen = ({route,navigation}) => {
 
   const {recipeId} = route.params;
   const dispatch = useDispatch();
-  const recipe = useSelector((state)=> state.recipes.recipe)
+  const {recipe,likedRecipes} = useSelector((state)=> state.recipes)
+  const token = useSelector((state)=>state.auth.accessToken)
+
 
   useEffect(() => {
    dispatch(getRecipeById(recipeId))
+   dispatch(getLikedRecipes(token))
+   const isLiked = likedRecipes.some((recipe)=>recipe.recipe_id===recipeId)
+   isLiked===true && setLikeIsActive(true) 
+   console.log(isLiked)
   },[])
-  console.log(recipe.ingredients)
-  const ingredientsArray = recipe?.ingredients.split(',');
+  // console.log(recipe.ingredients)
+  
+  const ingredientsArray = recipe?.ingredients?.split(',') || [];
+
+  const [bookmarkIsActive,setBookmarkIsActive] = useState(false)
+  const [likeIsActive,setLikeIsActive] = useState(false)
+
+
+
+  const handleClickLike = () => {
+    likeIsActive == true ? setLikeIsActive(false) : setLikeIsActive(true) 
+    dispatch(addLike(recipeId,token))
+    dispatch(getLikedRecipes(token))
+  }
+  const handleClickBookmark = () => {
+    bookmarkIsActive == true ? setBookmarkIsActive(false) : setBookmarkIsActive(true) 
+  }
 
   return (
     <View style={{minHeight:'100%'}}>
 
       <View style={{width:'100%',height:320}}>
         <ImageBackground source={{uri:recipe.img}} style={{flex:1,resize:'contain'}}>
-          <LinearGradient colors={['transparent', 'rgba(0, 0, 0, 0.4)']}style={styles.gradient}>   
+          <LinearGradient colors={['transparent', 'rgba(0, 0, 0, 0.1)']}style={styles.gradient}>   
             <TouchableOpacity onPress={()=>navigation.goBack()}><Image source={Images.arrow} style={{width:45,height:45,margin:10}}/></TouchableOpacity>
             <View style={{width:'70%',position:'absolute',left:0,bottom:0,marginLeft:20,marginBottom:30}}>
               <Text style={{fontFamily:"Poppins-Bold",fontSize:32,color:'white',lineHeight:36}}>{recipe.title}</Text>
               <Text style={{fontFamily:"Poppins-Medium",fontSize:18,color:'white'}}>by {recipe.author}</Text>
             </View>
             <View style={{width:'auto',position:'absolute',right:0,bottom:0,display:'flex',flexDirection:'row',gap:7,marginBottom:35,marginRight:20}}>
-              <Image source={Images.bookmark_button} style={{width:45,height:45,marginRight:7}} />
-              <Image source={Images.like_button} style={{width:45,height:45}} />
+              <TouchableOpacity onPress={handleClickBookmark} style={{backgroundColor:bookmarkIsActive == true ? '#eec302' :'#ffffff00',padding:4,borderRadius:10,marginRight:5}}><Image source={Images.bookmark_button} style={{width:35,height:35,tintColor:bookmarkIsActive == true ? 'white' :'#eec302'}} /></TouchableOpacity>
+              <TouchableOpacity onPress={handleClickLike} style={{backgroundColor:likeIsActive == true ? '#eec302' : '#ffffff00',padding:2,borderRadius:10,marginRight:5}}><Image source={Images.like_button} style={{width:38,height:38,tintColor:likeIsActive == true ? 'white' :'#eec302'}} /></TouchableOpacity>
             </View>
           </LinearGradient>
         </ImageBackground>

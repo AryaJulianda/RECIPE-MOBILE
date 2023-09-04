@@ -6,7 +6,9 @@ const initialState = {
   isError:false,
   isLoading : false,
   showModal:false,
-  modalMessage:{}
+  modalMessage:{},
+  latestRecipes:[],
+  likedRecipes:[]
 };
 
 export const recipeReducer = (state = initialState, action) => {
@@ -58,6 +60,21 @@ export const recipeReducer = (state = initialState, action) => {
         return {
           ...state,
           myRecipes: [],
+          isError: true,
+          isLoading:false
+        }
+
+      // get latest recipes
+      case 'GET_LATEST_RECIPES_SUCCESS':
+        return {
+            ...state,
+            latestRecipes: action.payload,
+            isLoading:false
+        };
+      case 'GET_LATEST_RECIPES_FAILED':
+        return {
+          ...state,
+          latestRecipes: [],
           isError: true,
           isLoading:false
         }
@@ -134,6 +151,45 @@ export const recipeReducer = (state = initialState, action) => {
         }
       default:
         return state;
+
+      // like
+      case 'ADD_LIKE_SUCCESS':
+        return {
+            ...state,
+            isLoading:false,
+        };
+      case 'ADD_LIKE_FAILED':
+        return {
+          ...state,
+          isLoading:false
+        }
+        // get liked recipes
+      case 'GET_LIKED_RECIPES_SUCCESS':
+        return {
+            ...state,
+            likedRecipes: action.payload,
+            isLoading:false
+        };
+      case 'GET_LIKED_RECIPES_FAILED':
+        return {
+          ...state,
+          likedRecipes: [],
+          isError: true,
+          isLoading:false
+        }
+
+
+      // bookmark
+      case 'ADD_BOOKMARK_SUCCESS':
+        return {
+            ...state,
+            isLoading:false,
+        };
+      case 'ADD_BOOKMARK_FAILED':
+        return {
+          ...state,
+          isLoading:false
+        }  
   }
 };
 

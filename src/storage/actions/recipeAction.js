@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 const serverUrl = 'https://creepy-pocket-yak.cyclic.app';
 
+
 export const getRecipeById = (recipeId) => {
     return async(dispatch) => {
         const url =`${serverUrl}/recipe/`+ recipeId
@@ -18,7 +19,7 @@ export const getRecipeById = (recipeId) => {
 
 export const getAllRecipes = (query = '', page = 1, limit) => {
     return async(dispatch) => {
-      const url = query ? `${serverUrl}/recipe/search?key=${query}&page=${page}&limit=${limit}` : `${serverUrl}/recipe?page=${page}&limit=${limit}`;
+      const url = query ? `${serverUrl}/recipe/search?search_by=title&key=${query}&page=${page}&limit=${limit}` : `${serverUrl}/recipe?page=${page}&limit=${limit}`;
         try {
           dispatch({type:'PENDING'})
           const res = await axios.get(url);
@@ -39,6 +40,18 @@ export const getAllRecipesById = () => {
           dispatch({type:'GET_RECIPES_BY_ID_SUCCESS',payload:res.data});
         }catch(err){
           dispatch({type:'GET_RECIPES_BY_ID_FAILED',error:err.message})
+        }
+    };
+};
+
+export const getLatestRecipes = () => {
+    return async(dispatch) => {
+        try {
+          dispatch({type:'PENDING'})
+          const res = await axios.get(`${serverUrl}/recipe/latest/get`)
+          dispatch({type:'GET_LATEST_RECIPES_SUCCESS',payload:res.data.data});
+        }catch(err){
+          dispatch({type:'GET_LATEST_RECIPES_FAILED',error:err.message})
         }
     };
 };
@@ -93,3 +106,37 @@ export const deleteRecipe = (recipeId,token) => {
     }
   }
 }
+
+export const addLike = (recipeId,token) => {
+  return async(dispatch) => {
+    console.log(recipeId,token,'ni')
+    try {
+      dispatch({type:'PENDING'})
+      const res = await axios.post(`${serverUrl}/recipe/like/${recipeId}`,{},{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }})
+      dispatch({type:'ADD_LIKE_SUCCESS',payload:res.data})
+    } catch (error) {
+      dispatch({type:'ADD_LIKE_FAILED',error:error})
+    }
+  }
+}
+
+export const getLikedRecipes = (token) => {
+  return async(dispatch,useSelector) => {
+    // const token = useSelector((s)=>s.auth.accessToken)
+    // console.log(token)
+      try {
+        dispatch({type:'PENDING'})
+        const res = await axios.get(`${serverUrl}/recipe/liked/get`,{
+          headers:{
+            Authorization:`Bearer ${token}`
+          }
+        })
+        dispatch({type:'GET_LIKED_RECIPES_SUCCESS',payload:res.data.data});
+      }catch(err){
+        dispatch({type:'GET_LIKED_RECIPES_FAILED',error:err})
+      }
+  };
+};

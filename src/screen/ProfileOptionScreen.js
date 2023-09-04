@@ -27,22 +27,22 @@ export const ProfileOption = ({navigation}) => {
           <View style={{display:'flex',flexDirection:'row',alignItems:'center',padding:20}} >
             <Image source={Images.icon_user} style={{tintColor:'#eec302',width:20,height:20,marginRight:12}} />
             <Text style={{fontFamily:'Poppins-Medium',fontSize:16,lineHeight:20}} >Edit Profile</Text>
-            <TouchableOpacity onPress={()=>{alert('Clicked')}} style={{position:'absolute',right:20}}><Image source={Images.next} style={{tintColor:'#999',width:20,height:20}} /></TouchableOpacity>
+            <TouchableOpacity onPress={()=>{alert('Clicked')}} style={{position:'absolute',right:10,padding:10}}><Image source={Images.next} style={{tintColor:'#999',width:20,height:20}} /></TouchableOpacity>
           </View>
           <View style={{display:'flex',flexDirection:'row',alignItems:'center',padding:20}} >
             <Image source={Images.myRecipe} style={{tintColor:'#eec302',width:20,height:20,marginRight:12}} />
             <Text style={{fontFamily:'Poppins-Medium',fontSize:16,lineHeight:20}} >My Recipe</Text>
-            <TouchableOpacity onPress={()=>{navigation.navigate('MyRecipe')}} style={{position:'absolute',right:20}}><Image source={Images.next} style={{tintColor:'#999',width:20,height:20}} /></TouchableOpacity>
+            <TouchableOpacity onPress={()=>{navigation.navigate('MyRecipe')}} style={{position:'absolute',right:10,padding:10}}><Image source={Images.next} style={{tintColor:'#999',width:20,height:20}} /></TouchableOpacity>
           </View>
           <View style={{display:'flex',flexDirection:'row',alignItems:'center',padding:20}} >
             <Image source={Images.bookmark} style={{tintColor:'#eec302',width:20,height:20,marginRight:12}} />
             <Text style={{fontFamily:'Poppins-Medium',fontSize:16,lineHeight:20}} >Saved Recipe</Text>
-            <TouchableOpacity onPress={()=>{alert('Clicked')}} style={{position:'absolute',right:20}}><Image source={Images.next} style={{tintColor:'#999',width:20,height:20}} /></TouchableOpacity>
+            <TouchableOpacity onPress={()=>{navigation.navigate('Bookmarked')}} style={{position:'absolute',right:10,padding:10}}><Image source={Images.next} style={{tintColor:'#999',width:20,height:20}} /></TouchableOpacity>
           </View>
           <View style={{display:'flex',flexDirection:'row',alignItems:'center',padding:20}} >
             <Image source={Images.like} style={{tintColor:'#eec302',width:20,height:20,marginRight:12}} />
             <Text style={{fontFamily:'Poppins-Medium',fontSize:16,lineHeight:20}} >Liked Recipe</Text>
-            <TouchableOpacity onPress={()=>{alert('Clicked')}} style={{position:'absolute',right:20}}><Image source={Images.next} style={{tintColor:'#999',width:20,height:20}} /></TouchableOpacity>
+            <TouchableOpacity onPress={()=>{navigation.navigate('Liked')}} style={{position:'absolute',right:10,padding:10}}><Image source={Images.next} style={{tintColor:'#999',width:20,height:20}} /></TouchableOpacity>
           </View>
         </View>
 

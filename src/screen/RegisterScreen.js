@@ -2,8 +2,12 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet ,TouchableOpacity, Image, ImageBackground} from 'react-native';
 import {Images} from '../../assets/images'
 import {styles} from '../styles/authStyle'
+import { useDispatch } from 'react-redux';
+import { regist } from '../storage/actions/authAction';
 
 function RegisterScreen({ navigation }) {
+  const dispatch = useDispatch()
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,8 +22,15 @@ function RegisterScreen({ navigation }) {
     setIsPasswordHidden(!isPasswordHidden);
   };
 
-  const handleLogin = () => {
-    
+  const inputData = {
+    email,
+    password,
+    username
+  }
+
+  const handleSubmit = () => {
+    // console.log(inputData)
+    dispatch(regist(inputData))
   };
 
   return (
@@ -76,7 +87,7 @@ function RegisterScreen({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity onPress={handleLogin} style={styles.buttonStyle}>
+        <TouchableOpacity onPress={handleSubmit} style={styles.buttonStyle}>
           <Text style={styles.textButton}>Register</Text>
         </TouchableOpacity>
         <Text onPress={() => navigation.navigate('Login')} style={styles.singUp}>Have an account? <Text style={{color:'#EFC81A'}}>Sing In</Text></Text>

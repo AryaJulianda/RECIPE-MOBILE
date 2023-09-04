@@ -28,6 +28,13 @@ export const styles = StyleSheet.create({
   },
   h2: {
     fontFamily:'Poppins-Medium',
+    fontSize:14,
+    color:'#eec302',
+    paddingHorizontal:20,
+    paddingVertical:5
+  },
+  h3: {
+    fontFamily:'Poppins-Medium',
     fontSize:12,
     textAlign:'center'
   },
@@ -48,7 +55,8 @@ export const styles = StyleSheet.create({
     bottom: 0, 
     left: 0 ,
     width:'50%',
-    margin:10
+    marginHorizontal:10,
+    marginVertical:5
   },
   gradient: {
     position: 'absolute',

@@ -8,13 +8,29 @@ import LoginScreen from './src/screen/LoginScreen';
 import RegisterScreen from './src/screen/RegisterScreen';
 import MainScreen from './src/screen/MainScreen';
 import DetailRecipeScreen from './src/screen/DetailRecipeScreen';
+import UserActivationScreen from './src/screen/UserActivationScreen.js'
+
+// Linking.getInitialURL().then(url => {
+//   if (url) {
+//     Linking.openURL(url);
+//   }
+// });
 
 function App() {
+//   const linking = {
+//     prefixes: ['http://localhost:8081/'],
+//     config: {
+//       screens: {
+//         UserActivation: 'activate',
+//       },
+//     },
+//   };
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Main" screenOptions={{headerShown: false}}>
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen name="UserActivation" component={UserActivationScreen} />
         <Stack.Screen name="Main" component={MainScreen} />
         <Stack.Screen name="Detail" component={DetailRecipeScreen} />
       </Stack.Navigator>

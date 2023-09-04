@@ -4,81 +4,56 @@ import { styles } from '../styles/homeStyle';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllRecipes } from '../storage/actions/recipeAction';
+import ListRecipes from '../components/ListRecipes';
 
 const SearchScreen = ({navigation}) => {
 
   const [searchQuery,setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const limit = 20;
-  const {recipes} = useSelector((state)=> state.recipes);
+  const limit = 8;
+  const {recipes,totalCount} = useSelector((state)=> state.recipes);
   // console.log(recipes)
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (searchQuery.length >= 3 || searchQuery === "") {
-      setCurrentPage(1);
-      dispatch(getAllRecipes(searchQuery, 1, limit));
-    }
-    }, [searchQuery, limit]);
+  const totalPage = Math.ceil(totalCount/limit)
 
-    useEffect(() => {
-    dispatch(getAllRecipes(searchQuery, currentPage, limit));
-    }, [currentPage, limit]);
-
-    const handleChange = (e) => {
-      setSearchQuery(e.target.value);
+  const onNext = () => {
+      currentPage < totalPage && setCurrentPage(currentPage + 1)
+  }
+  const onPrev = () => {
+      currentPage > 1 && setCurrentPage(currentPage - 1)
   }
 
+  useEffect(() => {
+    if (searchQuery.length >= 3) {
+      setCurrentPage(1);
+      dispatch(getAllRecipes(searchQuery, 1, limit));
+    } else if(searchQuery.length == 0) {
+      dispatch(getAllRecipes(searchQuery, currentPage, limit));
+    }
+    }, [searchQuery,currentPage, limit]);
+    
   return (
-    <View style={{backgroundColor:'#fff'}}>
+    <View style={{backgroundColor:'#fff',paddingBottom:130}}>
       <View style={styles.searchField}>
           <Image source={Images.search} style={{width:20,height:20}}/>
-          <TextInput placeholder='Search recipes in here' maxLength={40} style={styles.textInput} value={searchQuery} onChangeText={handleChange}/>
+          <TextInput placeholder='Search recipes in here' maxLength={40} style={styles.textInput} value={searchQuery} onChangeText={(text)=>setSearchQuery(text)}/>
       </View>
-      <ScrollView style={{backgroundColor:"#fff",minHeight:"100%",paddingHorizontal:20}}>
+      <ScrollView style={{backgroundColor:"white",minHeight:'100%',paddingHorizontal:20}}>
 
-
-        {/* Result */}
-        
-
-          <TouchableOpacity onPress={(()=>navigation.navigate('Detail'))}>
-            <View style={{display:'flex',flexDirection:'row',marginBottom:10}}>
-              <ImageBackground source={Images.burger} style={{width:80,height:80}}  imageStyle={{ borderRadius: 20 }}/>
-              <View style={{display:'flex',flexDirection:'column',justifyContent:'center',gap:1,marginHorizontal:15}}>
-                <Text style={{fontFamily:'Poppins-Bold',fontSize:18,lineHeight:30}}>Black Fish</Text>
-                <Text style={{fontFamily:'Poppins-Medium',fontSize:14}}>Main Course</Text>
-                <View style={{display:'flex',flexDirection:'row'}} > 
-                  <Text style={{fontFamily:'Poppins-Bold',fontSize:14,marginRight:7}}>Arya Julianda   •</Text>
-                  <Image source={Images.like} style={{width:15,height:15,marginRight:2,tintColor:'#eec302'}}/>
-                  <Text style={{fontFamily:'Poppins-Medium',fontSize:14}} >15k</Text>
-                </View>
-              </View>
-            </View>
-          </TouchableOpacity>
-
-          {/* <TouchableOpacity onPress={(()=>navigation.navigate('Detail',{recipeId : recipe.recipe_id}))} key={recipe.recipe_id}>
-          <View style={{display:'flex',flexDirection:'row',marginBottom:10,alignItems:'center'}}>
-            <ImageBackground source={recipe.img !== null ? {uri:recipe.img} : Images.burger} style={{width:90,height:90}}  imageStyle={{ borderRadius: 20 }}/>
-            <View style={{display:'flex',flexDirection:'column',justifyContent:'center',gap:1,marginHorizontal:15}}>
-              <Text style={{fontFamily:'Poppins-Bold',fontSize:16,lineHeight:30,width:130,lineHeight:22,textTransform:'capitalize'}}>{recipe.title}</Text>
-              <Text style={{fontFamily:'Poppins-Medium',fontSize:14,textTransform:'capitalize'}}>{recipe.category}</Text>
-              <View style={{display:'flex',flexDirection:'row'}} >
-                <Image source={Images.like} style={{width:15,height:15,marginRight:2,tintColor:'#eec302'}}/>
-                <Text style={{fontFamily:'Poppins-Medium',fontSize:14}} >15k</Text>
-              </View>
-            </View>
-            <View style={{display:'flex',flexDirection:'column',alignItems:"center",justifyContent:'center',position:"absolute",right:0}}>
-              <TouchableOpacity style={{backgroundColor:'skyblue',width:80,paddingVertical:3,borderRadius:8,marginBottom:5}} >
-                <Text style={{fontFamily:'Poppins-Bold',fontSize:16,textAlign:"center",color:'#fff'}}>Edit</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={{backgroundColor:'salmon',width:80,paddingVertical:3,borderRadius:8}} onPress={()=>handleDelete(recipe.recipe_id,token)}>
-                <Text style={{fontFamily:'Poppins-Bold',fontSize:16,textAlign:"center",color:'#fff'}}>Delete</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </TouchableOpacity> */}
+        <ListRecipes recipes={recipes} navigation={navigation}/>
+            
+        {totalPage != 1 &&
+        <View style={{display:'flex',flexDirection:'row',marginBottom:20,marginTop:10,justifyContent:'space-around',alignItems:'center'}} >
+          <TouchableOpacity style={{backgroundColor:'#eec302',paddingHorizontal:20,paddingVertical:10,borderRadius:10}}><Text style={{fontFamily:'Poppins-Medium',color:'white',fontSize:15}} onPress={onPrev}>Prev</Text></TouchableOpacity>
+          <Text style={{fontFamily:'Poppins-Medium',fontSize:15}}>Show {currentPage} From {totalPage}</Text>
+          <TouchableOpacity style={{backgroundColor:'#eec302',paddingHorizontal:20,paddingVertical:10,borderRadius:10}}><Text style={{fontFamily:'Poppins-Medium',color:'white',fontSize:15}} onPress={onNext}>Next</Text></TouchableOpacity>
+        </View>
+        }
 
       </ScrollView>
+
+
     </View>
     
   )

@@ -16,8 +16,9 @@ export const login = (inputData,navigation) => async(dispatch) => {
       error:error,
       modalMessage:{
         header:'Login failed!',
-        text:error.message}
+        text:error.response.data.message}
       });
+    alert(error.response.data.message)
   }
 }
 
@@ -33,6 +34,20 @@ export const regist = (inputData) => async(dispatch) => {
     dispatch({type:'REGIST_FAILED',error:error.response.data.message,modalMessage:{header:'Regist failed!',text:error.response.data.message}});
   }
 }
+
+export const activation = (token) => async(dispatch) => {
+  try {
+    dispatch({type:'REGIST_PENDING'})
+    const response = await axios.post(url+`/auth/activate` +token);
+    console.log('activation success' , response.data, token);
+    dispatch({type:'ACTIVATION_SUCCESS',modalMessage:{header:'Account has been set up',text:'Account activated successfully, please login'}});
+    // navigate('/');
+  } catch (error) {
+    console.log('activation failed',token,error)
+    // dispatch({type:'REGIST_FAILED',error:error.response.data.message,modalMessage:{header:'Regist failed!',text:error.response.data.message}});
+  }
+}
+
 export const logout = (navigation) => async(dispatch) => {
   try {
     dispatch({type:'REGIST_PENDING'})
