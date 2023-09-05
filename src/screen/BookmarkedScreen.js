@@ -1,20 +1,19 @@
 import { View, Text, TextInput, Button, StyleSheet ,TouchableOpacity, Image, ImageBackground,ScrollView} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getLatestRecipes } from '../storage/actions/recipeAction';import ListRecipes from '../components/ListRecipes';
+import { getBookmarkedRecipes, getLatestRecipes } from '../storage/actions/recipeAction';
+import ListRecipes from '../components/ListRecipes';
 import { Images } from '../../assets/images';
-;
 
 const BookmarkedScreen = ({navigation}) => {
   const dispatch = useDispatch()
-  const {latestRecipes} = useSelector((s)=>s.recipes)
+  const {bookmarkedRecipes} = useSelector((s)=>s.recipes)
+  const token = useSelector((state)=>state.auth.accessToken)
   
-  // useEffect(()=> {
-  //   dispatch(getLatestRecipes())
-  //   // console.log('ini recipes',recipes)
-  // },[])
-  
-  // console.log(latestRecipes)
+  useEffect(()=> {
+    dispatch(getBookmarkedRecipes(token))
+  },[])
+
 
   return (
     <ScrollView style={{backgroundColor:"white",minHeight:'100%',paddingHorizontal:20,marginBottom:150}}>
@@ -23,7 +22,7 @@ const BookmarkedScreen = ({navigation}) => {
         <Text style={{fontFamily:'Poppins-Bold',color:'#eec302',fontSize:24,textAlign:'center'}}>Saved Recipes</Text>
       </View>
 
-      <ListRecipes recipes={latestRecipes} navigation={navigation}/>
+      <ListRecipes recipes={bookmarkedRecipes} navigation={navigation}/>
     </ScrollView>
   )
 };

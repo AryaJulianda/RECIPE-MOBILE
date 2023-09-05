@@ -5,7 +5,7 @@ import { getRecipeById, postRecipe, updateRecipe } from '../storage/actions/reci
 import { Images } from '../../assets/images';
 import { useDispatch, useSelector } from 'react-redux';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-
+import Toast from 'react-native-toast-message';
 
 
 const EditRecipeScreen = ({route,navigation}) => {
@@ -137,7 +137,7 @@ const EditRecipeScreen = ({route,navigation}) => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const formData = new FormData();
@@ -147,11 +147,17 @@ const EditRecipeScreen = ({route,navigation}) => {
     if(oldRecipe.img != filePath.uri){
       formData.append("img", {uri:filePath.uri,name:filePath.fileName,type:filePath.type})
     }
-    
-    console.log('ini form data',formData)
-
-    dispatch(updateRecipe(recipeId,formData,token,navigation))
+    await dispatch(updateRecipe(recipeId,formData,token,navigation,renderToast))
   }
+
+  const renderToast = (type,header) => {
+    Toast.show({
+      type: type,
+      text1: header,
+      visibilityTime:5000
+    });
+  }
+
 
   return (
       <ScrollView style={{paddingHorizontal:20}}>

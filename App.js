@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 
 const Stack = createStackNavigator();
 
@@ -10,36 +11,43 @@ import MainScreen from './src/screen/MainScreen';
 import DetailRecipeScreen from './src/screen/DetailRecipeScreen';
 import UserActivationScreen from './src/screen/UserActivationScreen.js'
 
-// Linking.getInitialURL().then(url => {
-//   if (url) {
-//     Linking.openURL(url);
-//   }
-// });
-
 function App() {
-//   const linking = {
-//     prefixes: ['http://localhost:8081/'],
-//     config: {
-//       screens: {
-//         UserActivation: 'activate',
-//       },
-//     },
-//   };
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Main" screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="UserActivation" component={UserActivationScreen} />
-        <Stack.Screen name="Main" component={MainScreen} />
-        <Stack.Screen name="Detail" component={DetailRecipeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Main" screenOptions={{headerShown: false}}>
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Register" component={RegisterScreen} />
+          <Stack.Screen name="UserActivation" component={UserActivationScreen} />
+          <Stack.Screen name="Main" component={MainScreen} />
+          <Stack.Screen name="Detail" component={DetailRecipeScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+      <Toast config={toastConfig}/>
+    </>
   );
 }
 
 
 export default App;
+
+const toastConfig = {
+  success: (props) => (
+    <BaseToast
+      {...props}
+      style={{ borderLeftColor: 'yellowgreen' }}
+    />
+  ),
+  error: (props) => (
+    <ErrorToast
+      {...props}
+    />
+  )
+
+}
+
+
 
 
 // import * as React from 'react';

@@ -14,9 +14,11 @@ const ListRecipes = ({recipes,navigation}) => {
               <Text style={{fontFamily:'Poppins-Bold',fontSize:18,lineHeight:30}}>{recipe.title}</Text>
               <Text style={{fontFamily:'Poppins-Medium',fontSize:14,textTransform:'capitalize'}}>{recipe.category}</Text>
               <View style={{display:'flex',flexDirection:'row'}} > 
-                <Image source={Images.like} style={{width:15,height:15,marginRight:2,tintColor:'#eec302'}}/>
-                <Text style={{fontFamily:'Poppins-Medium',fontSize:14}} >{recipe.like_count}</Text>
-                <Text style={{fontFamily:'Poppins-Bold',fontSize:14,marginRight:7}}>   •   {recipe.author}</Text>
+                <View style={{display:recipe.like_count?'flex':'none',flexDirection:'row'}}>
+                  <Image source={Images.like} style={{width:15,height:15,marginRight:2,tintColor:'#eec302'}}/>
+                  <Text style={{fontFamily:'Poppins-Medium',fontSize:14}} >{recipe.like_count}   •   </Text>
+                </View>
+                <Text style={{fontFamily:'Poppins-Bold',fontSize:14,marginRight:7}}>{recipe.author}</Text>
               </View>
             </View>
           </View>

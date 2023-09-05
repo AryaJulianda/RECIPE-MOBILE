@@ -4,25 +4,58 @@ import { Images } from '../../assets/images';
 import { styles } from '../styles/homeStyle';
 import { ScrollView } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteRecipe, getAllRecipesById } from "../storage/actions/recipeAction";
+import { deleteRecipe, getAllRecipesById, getRecipeById } from "../storage/actions/recipeAction";
+import Toast from 'react-native-toast-message';
+import {Popup} from 'react-native-popup-confirm-toast'
 
 const MyRecipeScreen = ({navigation}) => {
 
   const dispatch = useDispatch();
   const recipes = useSelector((state)=>state.recipes.myRecipes);
- 
+  const token = useSelector((s)=>s.auth.accessToken)
 
   useEffect(()=> {
     dispatch(getAllRecipesById())
-    // console.log('ini recipes',recipes)
   },[])
  
-  const token = useSelector((s)=>s.auth.accessToken)
+  const handleEdit = (recipeId) => {
+    dispatch(getRecipeById(recipeId))
+    navigation.navigate('EditRecipe',{recipeId : recipeId})
+  }
 
-  const handleDelete = (recipeId,token) => {
-    dispatch(deleteRecipe(recipeId,token))
+  const handleDelete = async (recipeId) => {
+    await dispatch(deleteRecipe(recipeId,token,renderToast))
     dispatch(getAllRecipesById())
   };
+
+  const renderToast = (type,header) => {
+    Toast.show({
+      type: type,
+      text1: header,
+      visibilityTime:4000
+    });
+  }
+
+  const confirm = (recipeId) => {
+    Popup.show({
+        type: 'confirm',
+        title: 'Are you sure to delete this recipe?',
+        buttonText: 'Yes',
+        confirmText: 'No',
+        callback: () => {
+            handleDelete(recipeId)
+            Popup.hide();
+        },
+        cancelCallback: () => {
+            Popup.hide();
+        },
+        okButtonStyle:{backgroundColor:'#eec302'},
+        confirmButtonStyle:{borderWidth:1,borderColor:'#eec302'},
+        okButtonTextStyle:{fontFamily:'Poppins-Medium'},
+        confirmButtonTextStyle:{fontFamily:'Poppins-Medium',color:'#999'},
+        titleTextStyle:{fontFamily:'Poppins-Medium',color:'#999',marginBottom:0},
+    })
+  }
 
   return (
     <View style={{backgroundColor:'#fff'}}>
@@ -46,14 +79,14 @@ const MyRecipeScreen = ({navigation}) => {
               <Text style={{fontFamily:'Poppins-Medium',fontSize:14,textTransform:'capitalize'}}>{recipe.category}</Text>
               <View style={{display:'flex',flexDirection:'row'}} >
                 <Image source={Images.like} style={{width:15,height:15,marginRight:2,tintColor:'#eec302'}}/>
-                <Text style={{fontFamily:'Poppins-Medium',fontSize:14}} >15k</Text>
+                <Text style={{fontFamily:'Poppins-Medium',fontSize:14}} >{recipe.like_count}</Text>
               </View>
             </View>
             <View style={{display:'flex',flexDirection:'column',alignItems:"center",justifyContent:'center',position:"absolute",right:0}}>
-              <TouchableOpacity style={{backgroundColor:'skyblue',width:80,paddingVertical:3,borderRadius:8,marginBottom:5}} onPress={()=>navigation.navigate('EditRecipe',{recipeId : recipe.recipe_id})}>
+              <TouchableOpacity style={{backgroundColor:'skyblue',width:80,paddingVertical:3,borderRadius:8,marginBottom:5}} onPress={()=>handleEdit(recipe.recipe_id)}>
                 <Text style={{fontFamily:'Poppins-Bold',fontSize:16,textAlign:"center",color:'#fff'}}>Edit</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{backgroundColor:'salmon',width:80,paddingVertical:3,borderRadius:8}} onPress={()=>handleDelete(recipe.recipe_id,token)}>
+              <TouchableOpacity style={{backgroundColor:'salmon',width:80,paddingVertical:3,borderRadius:8}} onPress={()=>confirm(recipe.recipe_id)}>
                 <Text style={{fontFamily:'Poppins-Bold',fontSize:16,textAlign:"center",color:'#fff'}}>Delete</Text>
               </TouchableOpacity>
             </View>
@@ -65,10 +98,33 @@ const MyRecipeScreen = ({navigation}) => {
 
     </View> 
     }
-      
     </ScrollView>
   </View>
   )
 };
 
 export default MyRecipeScreen;
+
+{/* <View>
+    <TouchableOpacity
+        onPress={() =>
+            Popup.show({
+                type: 'confirm',
+                title: 'Dikkat!',
+                textBody: 'Mutlak özgürlük, kendi başına hiçbir anlam ifade etmez. ',
+                buttonText: 'Tamam',
+                confirmText: 'Vazgeç',
+                callback: () => {
+                    alert('Okey Callback && hidden');
+                    Popup.hide();
+                },
+                cancelCallback: () => {
+                    alert('Cancel Callback && hidden');
+                    Popup.hide();
+                },
+            })
+        }
+    >
+        <Text>Open Popup Confirm Message</Text>
+    </TouchableOpacity>
+</View> */}

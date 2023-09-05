@@ -5,13 +5,13 @@ import { styles } from '../styles/homeStyle';
 import LinearGradient from 'react-native-linear-gradient';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getRecipeById,addLike, getLikedRecipes } from '../storage/actions/recipeAction';
+import { getRecipeById,addLike, getLikedRecipes, addBookmark, getBookmarkedRecipes, removeBookmark } from '../storage/actions/recipeAction';
 
 const DetailRecipeScreen = ({route,navigation}) => {
 
   const {recipeId} = route.params;
   const dispatch = useDispatch();
-  const {recipe,likedRecipes} = useSelector((state)=> state.recipes)
+  const {recipe,likedRecipes,bookmarkedRecipes} = useSelector((state)=> state.recipes)
   const token = useSelector((state)=>state.auth.accessToken)
 
 
@@ -20,7 +20,8 @@ const DetailRecipeScreen = ({route,navigation}) => {
    dispatch(getLikedRecipes(token))
    const isLiked = likedRecipes.some((recipe)=>recipe.recipe_id===recipeId)
    isLiked===true && setLikeIsActive(true) 
-   console.log(isLiked)
+   const isBookmark = bookmarkedRecipes.some((recipe)=>recipe.recipe_id===recipeId)
+   isBookmark===true && setBookmarkIsActive(true) 
   },[])
   // console.log(recipe.ingredients)
   
@@ -31,13 +32,15 @@ const DetailRecipeScreen = ({route,navigation}) => {
 
 
 
-  const handleClickLike = () => {
+  const handleClickLike = async () => {
     likeIsActive == true ? setLikeIsActive(false) : setLikeIsActive(true) 
-    dispatch(addLike(recipeId,token))
+    await dispatch(addLike(recipeId,token))
     dispatch(getLikedRecipes(token))
   }
   const handleClickBookmark = () => {
     bookmarkIsActive == true ? setBookmarkIsActive(false) : setBookmarkIsActive(true) 
+    bookmarkIsActive == false ? dispatch(addBookmark(recipeId,token)) : dispatch(removeBookmark(recipeId,token))
+    dispatch(getBookmarkedRecipes(token))
   }
 
   return (

@@ -11,6 +11,7 @@ import ChatScreen from './ChatScreen';
 import ProfileScreen from './ProfileScreen';
 import SearchScreen from './SearchScreen';
 import { useSelector } from 'react-redux';
+import { Toast } from 'react-native-toast-message';
 
 const Tab = createBottomTabNavigator();
 

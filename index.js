@@ -8,6 +8,7 @@ import {name as appName} from './app.json';
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import storages from './src/storage/store';
+import {Root as PopupRootProvider} from 'react-native-popup-confirm-toast';
 
 const {store, persistor} = storages();
 
@@ -15,7 +16,9 @@ function Route() {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        <App />
+        <PopupRootProvider>
+          <App />
+        </PopupRootProvider>
       </PersistGate>
     </Provider>
   );

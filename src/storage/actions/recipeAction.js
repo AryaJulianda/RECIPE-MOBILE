@@ -39,7 +39,7 @@ export const getAllRecipesById = () => {
           const res = await axios.get(`${serverUrl}/recipe/my_recipe/` + user_id)
           dispatch({type:'GET_RECIPES_BY_ID_SUCCESS',payload:res.data});
         }catch(err){
-          dispatch({type:'GET_RECIPES_BY_ID_FAILED',error:err.message})
+          dispatch({type:'GET_RECIPES_BY_ID_FAILED',error:err})
         }
     };
 };
@@ -56,7 +56,8 @@ export const getLatestRecipes = () => {
     };
 };
 
-export const postRecipe = (inputData,token,navigation) => {
+// CRUD RECIPES
+export const postRecipe = (inputData,token,navigation,renderToast) => {
   return async(dispatch) => {
     try {
       dispatch({type:'PENDING'})
@@ -65,15 +66,17 @@ export const postRecipe = (inputData,token,navigation) => {
           Authorization:`Bearer ${token}`,
           'Content-Type':'multipart/form-data'
         }})
-      dispatch({type:'POST_RECIPE_SUCCESS',payload:res.data})
+      await dispatch({type:'POST_RECIPE_SUCCESS',payload:res.data})
+      renderToast('success','Add Recipe Successfull')
       navigation.navigate('Profile')
     } catch (error) {
       dispatch({type:'POST_RECIPE_FAILED',error:error.message})
+      renderToast('error','Add Recipe Failed')
     }
   }
 }
 
-export const updateRecipe = (recipeId,inputData,token,navigation) => {
+export const updateRecipe = (recipeId,inputData,token,navigation,renderToast) => {
   return async(dispatch) => {
     
     try {
@@ -83,30 +86,34 @@ export const updateRecipe = (recipeId,inputData,token,navigation) => {
           Authorization:`Bearer ${token}`,
           'Content-Type':'multipart/form-data'
         }})
-      dispatch({type:'PUT_RECIPE_SUCCESS',payload:res.data})
+      await dispatch({type:'PUT_RECIPE_SUCCESS',payload:res.data})
+      renderToast('success','Edit Recipe Successfull')
       navigation.navigate('MyRecipe')
     } catch (error) {
       dispatch({type:'PUT_RECIPE_FAILED',error:error.message})
+      renderToast('error','Edit Recipe Failed')
     }
   }
 }
 
-export const deleteRecipe = (recipeId,token) => {
+export const deleteRecipe = (recipeId,token,renderToast) => {
   return async(dispatch) => {
-    console.log(recipeId,token,'ni')
     try {
       dispatch({type:'PENDING'})
       const res = await axios.delete(`${serverUrl}/recipe/${recipeId}`,{
         headers:{
           Authorization:`Bearer ${token}`
         }})
-      dispatch({type:'DELETE_RECIPE_SUCCESS',payload:res.data})
+      await dispatch({type:'DELETE_RECIPE_SUCCESS',payload:res.data})
+      renderToast('success','Delete Recipe Successfull')
     } catch (error) {
       dispatch({type:'DELETE_RECIPE_FAILED',error:error})
+      renderToast('error','Delete Recipe Failed')
     }
   }
 }
 
+// LIKES
 export const addLike = (recipeId,token) => {
   return async(dispatch) => {
     console.log(recipeId,token,'ni')
@@ -137,6 +144,55 @@ export const getLikedRecipes = (token) => {
         dispatch({type:'GET_LIKED_RECIPES_SUCCESS',payload:res.data.data});
       }catch(err){
         dispatch({type:'GET_LIKED_RECIPES_FAILED',error:err})
+      }
+  };
+};
+
+// BOOKMARK
+export const addBookmark = (recipeId,token) => {
+  return async(dispatch) => {
+    // console.log(recipeId,token,'ni')
+    try {
+      dispatch({type:'PENDING'})
+      const res = await axios.post(`${serverUrl}/recipe/bookmark/${recipeId}`,{},{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }})
+      dispatch({type:'ADD_BOOKMARK_SUCCESS',payload:res.data})
+    } catch (error) {
+      dispatch({type:'ADD_BOOKMARK_FAILED',error:error})
+    }
+  }
+}
+
+export const removeBookmark = (recipeId,token) => {
+  return async(dispatch) => {
+    // console.log(recipeId,token,'ni')
+    try {
+      dispatch({type:'PENDING'})
+      const res = await axios.delete(`${serverUrl}/recipe/bookmark/${recipeId}`,{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }})
+      dispatch({type:'REMOVE_BOOKMARK_SUCCESS',payload:res.data})
+    } catch (error) {
+      dispatch({type:'REMOVE_BOOKMARK_FAILED',error:error})
+    }
+  }
+}
+
+export const getBookmarkedRecipes = (token) => {
+  return async(dispatch) => {
+      try {
+        dispatch({type:'PENDING'})
+        const res = await axios.get(`${serverUrl}/recipe/bookmarks/get`,{
+          headers:{
+            Authorization:`Bearer ${token}`
+          }
+        })
+        dispatch({type:'GET_BOOKMARKED_RECIPES_SUCCESS',payload:res.data.data});
+      }catch(err){
+        dispatch({type:'GET_BOOKMARKED_RECIPES_FAILED',error:err})
       }
   };
 };

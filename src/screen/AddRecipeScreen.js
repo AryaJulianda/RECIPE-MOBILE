@@ -1,17 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, StyleSheet ,TouchableOpacity, Image, ImageBackground,Platform,PermissionsAndroid,SafeAreaView, ScrollView} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import { postRecipe } from '../storage/actions/recipeAction';
 import { Images } from '../../assets/images';
 import { useDispatch, useSelector } from 'react-redux';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-
+import Toast from 'react-native-toast-message';
 
 
 const AddRecipeScreen = ({navigation}) => {
 
-  const token = useSelector((state)=> state.auth.accessToken)
   const dispatch = useDispatch()
+  const token = useSelector((state)=> state.auth.accessToken)
+  const {showToast,toastMessage} = useSelector((state)=>state.recipes)
+
+  // const [message,setMessage] = useState({
+  //   type:'',
+  //   header:''
+  // })
+
+  // useEffect(()=>{
+  //   setMessage({
+  //     type:toastMessage.type,
+  //     header:toastMessage.header
+  //   })
+  // },[])
 
   // const [selectedImage, setSelectedImage] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -127,7 +140,7 @@ const AddRecipeScreen = ({navigation}) => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
 
     const formData = new FormData();
@@ -138,10 +151,20 @@ const AddRecipeScreen = ({navigation}) => {
 
     console.log('ini form data',formData)
 
-    dispatch(postRecipe(formData,token,navigation))
+    dispatch(postRecipe(formData,token,navigation,renderToast))
   }
 
+  const renderToast = (type,text) => {
+    Toast.show({
+      type: type,
+      text1: text,
+      visibilityTime:5000
+    });
+  }
+
+
   return (
+    <>
       <ScrollView style={{paddingHorizontal:20}}>
         <Text style={{fontFamily:'Poppins-Medium',color:'#eec302',fontSize:24,textAlign:'center',paddingVertical:30}}>Add Your Recipe</Text>
 
@@ -194,8 +217,8 @@ const AddRecipeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
 
-
       </ScrollView>
+    </>
   )
 };
 

@@ -5,10 +5,11 @@ const initialState = {
   myRecipes:[],
   isError:false,
   isLoading : false,
-  showModal:false,
-  modalMessage:{},
+  showToast:false,
+  toastMessage:{},
   latestRecipes:[],
-  likedRecipes:[]
+  likedRecipes:[],
+  bookmarkedRecipes:[]
 };
 
 export const recipeReducer = (state = initialState, action) => {
@@ -83,10 +84,11 @@ export const recipeReducer = (state = initialState, action) => {
       case 'POST_RECIPE_SUCCESS':
         return {
             ...state,
-            showModal:true,
+            showToast:true,
             isLoading:false,
-            modalMessage:{
-              header:"Add Recipe Successfully"
+            toastMessage:{
+              header:"Add Recipe Successfully",
+              type:'success'
             }
         };
       case 'POST_RECIPE_FAILED':
@@ -94,9 +96,10 @@ export const recipeReducer = (state = initialState, action) => {
           ...state,
           isError: true,
           isLoading:false,
-          showModal:true,
-          modalMessage:{
-            header:'Add Recipe failed'
+          showToast:true,
+          toastMessage:{
+            header:'Add Recipe failed',
+            type:'error'
           }
         }
 
@@ -104,9 +107,10 @@ export const recipeReducer = (state = initialState, action) => {
       case 'PUT_RECIPE_SUCCESS':
         return {
             ...state,
-            showModal:true,
-            modalMessage:{
-              header:"Edit Recipe Successfully"
+            showToast:true,
+            toastMessage:{
+              header:"Edit Recipe Successfully",
+              type:'success'
             },
             isLoading:false
 
@@ -115,9 +119,10 @@ export const recipeReducer = (state = initialState, action) => {
         return {
           ...state,
           isError: true,
-          showModal:true,
-          modalMessage:{
-            header:'Edit Recipe failed'
+          showToast:true,
+          toastMessage:{
+            header:'Edit Recipe failed',
+            type:'error'
           },
           isLoading:false
         }
@@ -126,9 +131,10 @@ export const recipeReducer = (state = initialState, action) => {
       case 'DELETE_RECIPE_SUCCESS':
         return {
             ...state,
-            showModal:true,
-            modalMessage:{
-              header:"Delete Recipe Successfully"
+            showToast:true,
+            toastMessage:{
+              header:"Delete Recipe Successfully",
+              type:'success'
             },
             isLoading:false
         };
@@ -136,9 +142,10 @@ export const recipeReducer = (state = initialState, action) => {
         return {
           ...state,
           isError: true,
-          showModal:true,
-          modalMessage:{
-            header:'Delete Recipe failed'
+          showToast:true,
+          toastMessage:{
+            header:'Delete Recipe failed',
+            type:'error'
           },
           isLoading:false
         }
@@ -146,7 +153,7 @@ export const recipeReducer = (state = initialState, action) => {
       case 'CLOSE_MODAL':
         return{
           ...state,
-          showModal : false,
+          showToast : false,
           isLoading:false
         }
       default:
@@ -163,7 +170,7 @@ export const recipeReducer = (state = initialState, action) => {
           ...state,
           isLoading:false
         }
-        // get liked recipes
+      // get liked recipes
       case 'GET_LIKED_RECIPES_SUCCESS':
         return {
             ...state,
@@ -178,7 +185,6 @@ export const recipeReducer = (state = initialState, action) => {
           isLoading:false
         }
 
-
       // bookmark
       case 'ADD_BOOKMARK_SUCCESS':
         return {
@@ -190,6 +196,29 @@ export const recipeReducer = (state = initialState, action) => {
           ...state,
           isLoading:false
         }  
+      case 'REMOVE_BOOKMARK_SUCCESS':
+        return {
+            ...state,
+            isLoading:false,
+        };
+      case 'REMOVE_BOOKMARK_FAILED':
+        return {
+          ...state,
+          isLoading:false
+        }  
+      case 'GET_BOOKMARKED_RECIPES_SUCCESS':
+        return {
+            ...state,
+            bookmarkedRecipes: action.payload,
+            isLoading:false
+        };
+      case 'GET_BOOKMARKED_RECIPES_FAILED':
+        return {
+          ...state,
+          bookmarkedRecipes: [],
+          isError: true,
+          isLoading:false
+        }
   }
 };
 
