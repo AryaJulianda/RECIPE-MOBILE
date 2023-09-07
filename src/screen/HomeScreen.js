@@ -9,12 +9,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import NewRecipesScreen from './NewRecipesScreen.js'
 import Slider from '../components/Slider';
+import LoadingAnimation from '../components/LoadingAnimation';
 const HomeStack = createStackNavigator();
 
 const HomeScreenNav = ({navigation}) => {
   
   const dispatch = useDispatch()
-  const {latestRecipes} = useSelector((s)=>s.recipes)
+  const {latestRecipes,isLoading} = useSelector((s)=>s.recipes)
   
   useEffect(()=> {
     dispatch(getLatestRecipes())
@@ -24,6 +25,7 @@ const HomeScreenNav = ({navigation}) => {
   // console.log(latestRecipes)
 
   return (
+    <>{isLoading===true ? <LoadingAnimation/> : 
     <ScrollView style={{backgroundColor:"#fff"}}>
       <View style={styles.searchField}>
         <Image source={Images.search} style={{width:20,height:20}}/>
@@ -156,7 +158,8 @@ const HomeScreenNav = ({navigation}) => {
         </View>
       </View>
       
-    </ScrollView>
+    </ScrollView>}
+    </>
   )
 }
 

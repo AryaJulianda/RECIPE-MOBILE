@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     fontFamily:'Poppins-Medium',
     fontSize:14,
     color:'#999',
-    width:'90%'
+    width:'100%'
   },
 
   h1: {
@@ -66,5 +66,31 @@ export const styles = StyleSheet.create({
     height: '100%', 
     backgroundColor: 'rgba(0, 0, 0, 0.1)', 
     borderRadius: 10,
-  }
+  },
+  isActiveButton : { 
+    backgroundColor:'#eec302',
+    paddingHorizontal:15,
+    paddingVertical:7,
+    borderRadius:10,
+    marginRight:5
+  },
+  isActiveTextButton : {
+    fontFamily:'Poppins-Medium',
+    color:'white',
+    fontSize:12
+  },
+  disActiveButton : {
+    backgroundColor:'#fff',
+    paddingHorizontal:15,
+    paddingVertical:7,
+    borderRadius:10,
+    borderWidth:1,
+    borderColor:'#eec302',
+    marginRight:5
+  },
+  disActiveTextButton : {
+    fontFamily:'Poppins-Medium',
+    color:'#eec302',
+    fontSize:12
+  },
 })

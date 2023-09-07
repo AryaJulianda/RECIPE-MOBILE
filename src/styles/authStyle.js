@@ -66,6 +66,14 @@ export const styles = StyleSheet.create({
     borderRadius:20,
     marginTop:15
   },
+  buttonStyle2: {
+    paddingHorizontal:60,
+    backgroundColor:'#EFC81A',
+    fontSize:16,
+    paddingVertical:20,
+    borderRadius:20,
+    marginTop:15
+  },
   textButton : {
     color:'white',
     fontFamily:'Poppins-Medium',

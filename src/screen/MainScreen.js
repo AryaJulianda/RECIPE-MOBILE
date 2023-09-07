@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Text, TextInput, Button, StyleSheet ,TouchableOpacity, Image, ImageBackground} from 'react-native';
 import {Images} from '../../assets/images'
@@ -19,9 +19,12 @@ function MainScreen({navigation}) {
 
   const {user} = useSelector((state) => state.auth);
 
-  // if(!user) {
-  //   navigation.navigate('Login');
-  // }
+  useEffect(() => {
+    if(!user) {
+      navigation.replace('Login');
+    }
+  }, []);
+
 
   return (
     <>

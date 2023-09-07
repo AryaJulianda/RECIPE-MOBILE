@@ -6,23 +6,29 @@ import { Images } from '../../assets/images';
 import { useDispatch, useSelector } from 'react-redux';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Toast from 'react-native-toast-message';
+import LoadingAnimation from '../components/LoadingAnimation';
 
 
 const EditRecipeScreen = ({route,navigation}) => {
 
   const token = useSelector((state)=> state.auth.accessToken)
   const oldRecipe = useSelector((state)=> state.recipes.recipe)
+  const isLoading = useSelector((state)=> state.recipes.isLoading)
   const dispatch = useDispatch()
 
   const {recipeId} = route.params;
 
   useEffect(() => {
-   dispatch(getRecipeById(recipeId))
-   setRecipe({ title: oldRecipe.title, ingredients: oldRecipe.ingredients})
-   setSelectedCategory(`${oldRecipe.category_id}`)
-   setFilePath({uri: oldRecipe.img})
-  },[])
+    const getRecipe= async () => {
+      // await dispatch(getRecipeById(recipeId))
+      setRecipe({ title: oldRecipe.title, ingredients: oldRecipe.ingredients})
+      setSelectedCategory(`${oldRecipe.category_id}`)
+      setFilePath({uri: oldRecipe.img})
+    }
+    getRecipe()
+  },[oldRecipe])
 
+  // console.log(oldRecipe)
   // const [selectedImage, setSelectedImage] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [recipe,setRecipe] = useState({
@@ -154,12 +160,13 @@ const EditRecipeScreen = ({route,navigation}) => {
     Toast.show({
       type: type,
       text1: header,
-      visibilityTime:5000
+      visibilityTime:8000
     });
   }
 
 
   return (
+    <>{isLoading===true ? <LoadingAnimation/> :
       <ScrollView style={{paddingHorizontal:20}}>
         <Text style={{fontFamily:'Poppins-Medium',color:'#eec302',fontSize:24,textAlign:'center',paddingVertical:30}}>Edit Recipe</Text>
 
@@ -213,7 +220,8 @@ const EditRecipeScreen = ({route,navigation}) => {
         </View>
 
 
-      </ScrollView>
+      </ScrollView>}
+    </>
   )
 };
 

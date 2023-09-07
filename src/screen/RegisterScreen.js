@@ -4,6 +4,7 @@ import {Images} from '../../assets/images'
 import {styles} from '../styles/authStyle'
 import { useDispatch } from 'react-redux';
 import { regist } from '../storage/actions/authAction';
+import {Popup} from 'react-native-popup-confirm-toast'
 
 function RegisterScreen({ navigation }) {
   const dispatch = useDispatch()
@@ -28,9 +29,45 @@ function RegisterScreen({ navigation }) {
     username
   }
 
+  const isEmailValid = (email) => {
+    const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+    return emailRegex.test(email);
+  };
+  
+  const isPasswordValid = (password) => {
+    return password.length >= 8;
+  };
+
+
+
+  const isFormValid = () => {
+    const errors = [];
+    if (username.trim() === '') errors.push(' • Username is required');
+    if (!isEmailValid(email)) errors.push(' • Email not valid');
+    if (!isPasswordValid(password)) errors.push(' • Password must have at least 8 character');
+    if (errors.length > 0) {
+      Popup.show({
+        type: 'warning',
+        title: 'Regist Failed!',
+        textBody: errors.join('\n'),
+        buttonText: 'OK',
+        callback: () => Popup.hide(),
+        okButtonStyle:{backgroundColor:'#eec302'},
+        okButtonTextStyle:{fontFamily:'Poppins-Medium'},
+        titleTextStyle:{fontFamily:'Poppins-Bold',color:'salmon',marginBottom:10},
+        descTextStyle:{fontFamily:'Poppins-Medium',color:'#999',marginBottom:0,textAlign:'left',paddingHorizontal:10},
+      })
+      return false;
+    }
+    return true;
+  };
+
+ 
+
   const handleSubmit = () => {
-    // console.log(inputData)
-    dispatch(regist(inputData))
+    if (isFormValid()) {
+      dispatch(regist(inputData, Popup));
+    }
   };
 
   return (
@@ -97,4 +134,3 @@ function RegisterScreen({ navigation }) {
 }
 
 export default RegisterScreen;
-

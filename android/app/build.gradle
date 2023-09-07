@@ -279,7 +279,7 @@ dependencies {
     debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.flipper'
     }
-
+     
     if (enableHermes) {
         //noinspection GradleDynamicVersion
         implementation("com.facebook.react:hermes-engine:+") { // From node_modules

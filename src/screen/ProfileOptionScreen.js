@@ -17,8 +17,8 @@ export const ProfileOption = ({navigation}) => {
   return (
       <View style={{backgroundColor:'white',width:'100%',height:'100%',display:'flex',alignItems:'center'}} >
         
-        <View style={{backgroundColor:'#EEC302',display:'flex',justifyContent:'center',alignItems:'center',paddingVertical:40,gap:10,width:'100%'}} >
-          <ImageBackground source={{uri: user?.photo}} style={{width:100,height:100}} imageStyle={{borderRadius:100}} />
+        <View style={{backgroundColor:'#EEC302',display:'flex',justifyContent:'center',alignItems:'center',paddingVertical:40,width:'100%'}} >
+          <ImageBackground source={user?.photo ? {uri: user?.photo} : Images.photoDefault} style={{width:100,height:100,marginBottom:10}} imageStyle={{borderRadius:100}} />
           <Text style={{fontFamily:'Poppins-Bold',color:'#fff',fontSize:18}}>{user?.username}</Text>
         </View>
 
@@ -27,7 +27,7 @@ export const ProfileOption = ({navigation}) => {
           <View style={{display:'flex',flexDirection:'row',alignItems:'center',padding:20}} >
             <Image source={Images.icon_user} style={{tintColor:'#eec302',width:20,height:20,marginRight:12}} />
             <Text style={{fontFamily:'Poppins-Medium',fontSize:16,lineHeight:20}} >Edit Profile</Text>
-            <TouchableOpacity onPress={()=>{alert('Clicked')}} style={{position:'absolute',right:10,padding:10}}><Image source={Images.next} style={{tintColor:'#999',width:20,height:20}} /></TouchableOpacity>
+            <TouchableOpacity onPress={()=>{navigation.navigate('EditProfile')}} style={{position:'absolute',right:10,padding:10}}><Image source={Images.next} style={{tintColor:'#999',width:20,height:20}} /></TouchableOpacity>
           </View>
           <View style={{display:'flex',flexDirection:'row',alignItems:'center',padding:20}} >
             <Image source={Images.myRecipe} style={{tintColor:'#eec302',width:20,height:20,marginRight:12}} />

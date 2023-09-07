@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
@@ -10,18 +10,19 @@ import RegisterScreen from './src/screen/RegisterScreen';
 import MainScreen from './src/screen/MainScreen';
 import DetailRecipeScreen from './src/screen/DetailRecipeScreen';
 import UserActivationScreen from './src/screen/UserActivationScreen.js'
+import SplashScreen from './src/screen/SplashScreen';
 
 function App() {
-
   return (
     <>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Main" screenOptions={{headerShown: false}}>
+        <Stack.Navigator initialRouteName="Splash" screenOptions={{headerShown: false}}>
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} />
           <Stack.Screen name="UserActivation" component={UserActivationScreen} />
           <Stack.Screen name="Main" component={MainScreen} />
           <Stack.Screen name="Detail" component={DetailRecipeScreen} />
+          <Stack.Screen name="Splash" component={SplashScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
       <Toast config={toastConfig}/>

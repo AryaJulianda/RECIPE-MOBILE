@@ -6,12 +6,13 @@ import LinearGradient from 'react-native-linear-gradient';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getRecipeById,addLike, getLikedRecipes, addBookmark, getBookmarkedRecipes, removeBookmark } from '../storage/actions/recipeAction';
+import LoadingAnimation from '../components/LoadingAnimation';
 
 const DetailRecipeScreen = ({route,navigation}) => {
 
   const {recipeId} = route.params;
   const dispatch = useDispatch();
-  const {recipe,likedRecipes,bookmarkedRecipes} = useSelector((state)=> state.recipes)
+  const {recipe,likedRecipes,bookmarkedRecipes,isLoading} = useSelector((state)=> state.recipes)
   const token = useSelector((state)=>state.auth.accessToken)
 
 
@@ -34,7 +35,7 @@ const DetailRecipeScreen = ({route,navigation}) => {
 
   const handleClickLike = async () => {
     likeIsActive == true ? setLikeIsActive(false) : setLikeIsActive(true) 
-    await dispatch(addLike(recipeId,token))
+    dispatch(addLike(recipeId,token))
     dispatch(getLikedRecipes(token))
   }
   const handleClickBookmark = () => {
@@ -44,8 +45,10 @@ const DetailRecipeScreen = ({route,navigation}) => {
   }
 
   return (
+    <>
+    {isLoading===true? <LoadingAnimation/> :
     <View style={{minHeight:'100%'}}>
-
+      
       <View style={{width:'100%',height:320}}>
         <ImageBackground source={{uri:recipe.img}} style={{flex:1,resize:'contain'}}>
           <LinearGradient colors={['transparent', 'rgba(0, 0, 0, 0.1)']}style={styles.gradient}>   
@@ -71,7 +74,8 @@ const DetailRecipeScreen = ({route,navigation}) => {
         ))}
       </View>
 
-      </View>
+    </View>}
+    </>
   )
 };
 

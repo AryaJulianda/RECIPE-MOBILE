@@ -25,5 +25,7 @@ export const Images = {
   apptizer:require('./apptizer.png'),
   dessert:require('./dessert.png'),
   folder:require('./folder.png'),
-  camera:require('./camera.png')
+  camera:require('./camera.png'),
+  logo:require('./barbeque.png'),
+  photoDefault:require('./pp.jpg')
 };

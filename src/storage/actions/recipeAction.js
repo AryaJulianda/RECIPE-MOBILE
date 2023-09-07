@@ -17,9 +17,9 @@ export const getRecipeById = (recipeId) => {
     };
 };
 
-export const getAllRecipes = (query = '', page = 1, limit) => {
+export const getAllRecipes = (query = '', page = 1, limit,searchBy) => {
     return async(dispatch) => {
-      const url = query ? `${serverUrl}/recipe/search?search_by=title&key=${query}&page=${page}&limit=${limit}` : `${serverUrl}/recipe?page=${page}&limit=${limit}`;
+      const url = query ? `${serverUrl}/recipe/search?search_by=${searchBy}&key=${query}&page=${page}&limit=${limit}` : `${serverUrl}/recipe?page=${page}&limit=${limit}`;
         try {
           dispatch({type:'PENDING'})
           const res = await axios.get(url);
@@ -70,7 +70,7 @@ export const postRecipe = (inputData,token,navigation,renderToast) => {
       renderToast('success','Add Recipe Successfull')
       navigation.navigate('Profile')
     } catch (error) {
-      dispatch({type:'POST_RECIPE_FAILED',error:error.message})
+      dispatch({type:'POST_RECIPE_FAILED',error:error})
       renderToast('error','Add Recipe Failed')
     }
   }
@@ -90,7 +90,7 @@ export const updateRecipe = (recipeId,inputData,token,navigation,renderToast) =>
       renderToast('success','Edit Recipe Successfull')
       navigation.navigate('MyRecipe')
     } catch (error) {
-      dispatch({type:'PUT_RECIPE_FAILED',error:error.message})
+      dispatch({type:'PUT_RECIPE_FAILED',error:error})
       renderToast('error','Edit Recipe Failed')
     }
   }
@@ -118,7 +118,7 @@ export const addLike = (recipeId,token) => {
   return async(dispatch) => {
     console.log(recipeId,token,'ni')
     try {
-      dispatch({type:'PENDING'})
+      // dispatch({type:'PENDING'})
       const res = await axios.post(`${serverUrl}/recipe/like/${recipeId}`,{},{
         headers:{
           Authorization:`Bearer ${token}`
@@ -153,7 +153,7 @@ export const addBookmark = (recipeId,token) => {
   return async(dispatch) => {
     // console.log(recipeId,token,'ni')
     try {
-      dispatch({type:'PENDING'})
+      // dispatch({type:'PENDING'})
       const res = await axios.post(`${serverUrl}/recipe/bookmark/${recipeId}`,{},{
         headers:{
           Authorization:`Bearer ${token}`
@@ -169,7 +169,7 @@ export const removeBookmark = (recipeId,token) => {
   return async(dispatch) => {
     // console.log(recipeId,token,'ni')
     try {
-      dispatch({type:'PENDING'})
+      // dispatch({type:'PENDING'})
       const res = await axios.delete(`${serverUrl}/recipe/bookmark/${recipeId}`,{
         headers:{
           Authorization:`Bearer ${token}`

@@ -6,9 +6,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ProfileOption } from './ProfileOptionScreen';
 
 import MyRecipeScreen from './MyRecipeScreen.js'
-import EditRecipeScreen from './EditRecipeScreen.js'
+import EditProfileScreen from './EditProfileScreen.js'
 import BookmarkedScreen from './BookmarkedScreen.js'
 import LikedScreen from './LikedScreen.js'
+import EditRecipeScreen from './EditRecipeScreen';
 
 const ProfileStack = createStackNavigator();
 
@@ -65,7 +66,7 @@ function ProfileScreen() {
   return (
     <ProfileStack.Navigator screenOptions={{headerShown: false}}>
       <ProfileStack.Screen
-        name="ProfileOprion"
+        name="ProfileOption"
         component={ProfileOption}
       />
       <ProfileStack.Screen
@@ -79,6 +80,10 @@ function ProfileScreen() {
       <ProfileStack.Screen
         name="Liked"
         component={LikedScreen}
+      />
+      <ProfileStack.Screen
+        name="EditProfile"
+        component={EditProfileScreen}
       />
       <ProfileStack.Screen
         name="EditRecipe"

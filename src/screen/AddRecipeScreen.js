@@ -6,13 +6,14 @@ import { Images } from '../../assets/images';
 import { useDispatch, useSelector } from 'react-redux';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Toast from 'react-native-toast-message';
-
+import LoadingAnimation from '../components/LoadingAnimation';
+import OneSignal from 'react-native-onesignal';
 
 const AddRecipeScreen = ({navigation}) => {
 
   const dispatch = useDispatch()
   const token = useSelector((state)=> state.auth.accessToken)
-  const {showToast,toastMessage} = useSelector((state)=>state.recipes)
+  const {showToast,toastMessage,isLoading} = useSelector((state)=>state.recipes)
 
   // const [message,setMessage] = useState({
   //   type:'',
@@ -158,13 +159,13 @@ const AddRecipeScreen = ({navigation}) => {
     Toast.show({
       type: type,
       text1: text,
-      visibilityTime:5000
+      visibilityTime:8000
     });
   }
 
 
   return (
-    <>
+    <>{isLoading === true ? <LoadingAnimation/> :
       <ScrollView style={{paddingHorizontal:20}}>
         <Text style={{fontFamily:'Poppins-Medium',color:'#eec302',fontSize:24,textAlign:'center',paddingVertical:30}}>Add Your Recipe</Text>
 
@@ -217,7 +218,7 @@ const AddRecipeScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
 
-      </ScrollView>
+      </ScrollView>}
     </>
   )
 };
