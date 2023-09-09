@@ -11,7 +11,7 @@
     "emu": "start-android-emulator",
     "clean": "cd android && gradlew clean",
     "signReport": "cd android && gradlew signingReport",
-    "apk": "cd android && gradlew assembleRelease",
+    "apk": "cd android && gradlew assembleRelease -x bundleReleaseJsAndAssets",
     "aab": "cd android && gradlew bundleRelease",
     "assetsBundle":" react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
   },
