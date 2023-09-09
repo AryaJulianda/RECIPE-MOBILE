@@ -20,7 +20,7 @@ function MainScreen({navigation}) {
   const {user} = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if(!user) {
+    if(user.length === 0 || !user) {
       navigation.replace('Login');
     }
   }, []);

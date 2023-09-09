@@ -10,7 +10,10 @@
     "lint": "eslint .",
     "emu": "start-android-emulator",
     "clean": "cd android && gradlew clean",
-    "signReport": "cd android && gradlew signingReport"
+    "signReport": "cd android && gradlew signingReport",
+    "apk": "cd android && gradlew assembleRelease",
+    "aab": "cd android && gradlew bundleRelease",
+    "assetsBundle":" react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.19.3",
@@ -32,7 +35,6 @@
     "react-native-screens": "^3.24.0",
     "react-native-splash-screen": "^3.3.0",
     "react-native-toast-message": "^2.1.6",
-    "react-native-vector-icons": "^10.0.0",
     "react-redux": "^8.1.2",
     "redux": "^4.2.1",
     "redux-logger": "^3.0.6",
