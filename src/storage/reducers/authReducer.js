@@ -87,7 +87,7 @@ export const authReducer = (state = initialState, action) => {
     case "DELETE_TOKEN":
         return{
             ...state,
-            user:null,
+            user:{},
             isLoadingAuth:false,
             isError:false,
             accessToken:null

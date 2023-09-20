@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import {BASE_URL} from '@env';
 
-const serverUrl = 'https://creepy-pocket-yak.cyclic.app';
-
+const serverUrl = BASE_URL;
 
 export const getRecipeById = (recipeId) => {
     return async(dispatch) => {

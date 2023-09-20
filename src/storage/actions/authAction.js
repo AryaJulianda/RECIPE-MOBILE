@@ -1,6 +1,7 @@
 import axios from "axios";
+import {BASE_URL} from '@env';
 
-const url = 'https://creepy-pocket-yak.cyclic.app'
+const url = BASE_URL
 import {Popup} from 'react-native-popup-confirm-toast'
 
 export const login = (inputData,navigation) => async(dispatch) => {

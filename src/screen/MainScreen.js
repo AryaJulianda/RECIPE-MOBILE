@@ -20,7 +20,9 @@ function MainScreen({navigation}) {
   const {user} = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if(!Object.keys(user).length || user==null) {
+    if(user==null){
+      navigation.replace('Login');
+    }else if(!Object.keys(user)?.length) {
       navigation.replace('Login');
     }
   }, []);
