@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react"
-import { View, Text, TextInput, Button, StyleSheet ,TouchableOpacity, Image, ImageBackground, Alert} from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet ,TouchableOpacity, Image, ImageBackground, Alert, RefreshControl} from 'react-native';
 import { Images } from '../../assets/images';
 import { styles } from '../styles/homeStyle';
 import { ScrollView } from "react-native-gesture-handler";
@@ -15,6 +15,7 @@ const MyRecipeScreen = ({navigation}) => {
   const recipes = useSelector((state)=>state.recipes.myRecipes);
   const token = useSelector((s)=>s.auth.accessToken)
   const isLoading = useSelector((s)=> s.recipes.isLoading)
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(()=> {
     dispatch(getAllRecipesById())
@@ -59,10 +60,19 @@ const MyRecipeScreen = ({navigation}) => {
     })
   }
 
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await dispatch(getAllRecipesById())
+    setRefreshing(false);
+  };
+
   return (
     <View style={{backgroundColor:'#fff'}}>
       {isLoading===true ? <LoadingAnimation/> :
-      <ScrollView style={{backgroundColor:"#fff",minHeight:"100%"}}>
+      <ScrollView style={{backgroundColor:"#fff",minHeight:"100%"}}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+      }>
 
       <View style={{display:'flex',flexDirection:'row',alignItems:'center',justifyContent:'center',marginVertical:20}}>
         <TouchableOpacity onPress={()=>navigation.goBack()} style={{position:'absolute',left:0,marginLeft:20}}><Image source={Images.arrow} style={{width:45,height:45,tintColor:'#eec302'}}/></TouchableOpacity>

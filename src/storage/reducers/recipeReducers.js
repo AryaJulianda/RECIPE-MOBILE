@@ -7,7 +7,9 @@ const initialState = {
   isLoading : false,
   showToast:false,
   toastMessage:{},
+  homePageRecipes:[],
   latestRecipes:[],
+  popularRecipes:[],
   likedRecipes:[],
   bookmarkedRecipes:[]
 };
@@ -65,6 +67,21 @@ export const recipeReducer = (state = initialState, action) => {
           isLoading:false
         }
 
+      // get homepage recipes
+      case 'GET_HOMEPAGE_RECIPES_SUCCESS':
+        return {
+            ...state,
+            homePageRecipes: action.payload,
+            isLoading:false
+        };
+      case 'GET_HOMEPAGE_RECIPES_FAILED':
+        return {
+          ...state,
+          homePageRecipes: [],
+          isError: true,
+          isLoading:false
+        }
+
       // get latest recipes
       case 'GET_LATEST_RECIPES_SUCCESS':
         return {
@@ -76,6 +93,21 @@ export const recipeReducer = (state = initialState, action) => {
         return {
           ...state,
           latestRecipes: [],
+          isError: true,
+          isLoading:false
+        }
+
+      // get POPULAR recipes
+      case 'GET_POPULAR_RECIPES_SUCCESS':
+        return {
+            ...state,
+            popularRecipes: action.payload,
+            isLoading:false
+        };
+      case 'GET_POPULAR_RECIPES_FAILED':
+        return {
+          ...state,
+          popularRecipes: [],
           isError: true,
           isLoading:false
         }

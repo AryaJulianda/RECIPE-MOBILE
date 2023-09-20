@@ -5,10 +5,11 @@ import {styles} from '../styles/authStyle'
 import { useDispatch, useSelector } from 'react-redux';
 import {login } from '../storage/actions/authAction'
 import {Popup} from 'react-native-popup-confirm-toast'
+import LoadingAnimation from '../components/LoadingAnimation';
 
 function LoginScreen({ navigation }) {
 
-  const {user} = useSelector((state) => state.auth);
+  const {user,isLoadingAuth} = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState('');
@@ -34,11 +35,7 @@ function LoginScreen({ navigation }) {
 
   return (
     <>
-
-    
-      {/* <View style={styles.hero}>
-        <ImageBackground source={Images.hero} style={{flex: 1,width:'100%',height:'auto'}}/>
-      </View>  */}
+    {isLoadingAuth==true ? <LoadingAnimation/> :
       <View style={styles.container} >
         
         <Text style={styles.h1}>Wellcome !</Text>
@@ -79,6 +76,7 @@ function LoginScreen({ navigation }) {
         </TouchableOpacity>
         <Text onPress={() => navigation.navigate('Register')} style={styles.singUp}>Don't have an account? <Text style={{color:'#EFC81A'}}>Sing up</Text></Text>
       </View>
+    }
     </> 
   );
 }

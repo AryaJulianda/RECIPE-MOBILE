@@ -15,18 +15,6 @@ const AddRecipeScreen = ({navigation}) => {
   const token = useSelector((state)=> state.auth.accessToken)
   const {showToast,toastMessage,isLoading} = useSelector((state)=>state.recipes)
 
-  // const [message,setMessage] = useState({
-  //   type:'',
-  //   header:''
-  // })
-
-  // useEffect(()=>{
-  //   setMessage({
-  //     type:toastMessage.type,
-  //     header:toastMessage.header
-  //   })
-  // },[])
-
   // const [selectedImage, setSelectedImage] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [recipe,setRecipe] = useState({
@@ -148,9 +136,13 @@ const AddRecipeScreen = ({navigation}) => {
     formData.append('title',recipe.title);
     formData.append('ingredients',recipe.ingredients);
     formData.append('category_id',selectedCategory);
-    formData.append("img", {uri:filePath.uri,name:filePath.fileName,type:filePath.type})
+    if(Object.keys(filePath).length !== 0) {
+      formData.append("img", {uri:filePath.uri,name:filePath.fileName,type:filePath.type}) && Object.keys(filePath).length != 0
+    }
+    
 
-    console.log('ini form data',formData)
+    console.log('filePath =>',filePath)
+    console.log('formData =>',formData)
 
     dispatch(postRecipe(formData,token,navigation,renderToast))
   }

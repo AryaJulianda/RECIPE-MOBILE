@@ -5,7 +5,7 @@ import {Popup} from 'react-native-popup-confirm-toast'
 
 export const login = (inputData,navigation) => async(dispatch) => {
   try {
-    dispatch({type:'LOGIN_PENDING'})
+    dispatch({type:'AUTH_PENDING'})
     const response = await axios.post(url+'/auth/login',inputData);
     console.log('login success',response.data);
     dispatch({type:'LOGIN_SUCCESS',payload:response.data});
@@ -29,7 +29,7 @@ export const login = (inputData,navigation) => async(dispatch) => {
 
 export const regist = (inputData,Popup) => async(dispatch) => {
   try {
-    dispatch({type:'REGIST_PENDING'})
+    dispatch({type:'AUTH_PENDING'})
     const response = await axios.post(url+`/auth/register`,inputData);
     console.log('regist success',inputData);
     dispatch({type:'REGIST_SUCCESS',payload:response.data,modalMessage:{header:'You are all set!',text:'Please check your email account for verification'}});
@@ -64,7 +64,7 @@ export const regist = (inputData,Popup) => async(dispatch) => {
 
 export const activation = (token) => async(dispatch) => {
   try {
-    dispatch({type:'REGIST_PENDING'})
+    dispatch({type:'AUTH_PENDING'})
     const response = await axios.post(url+`/auth/activate` +token);
     console.log('activation success' , response.data, token);
     dispatch({type:'ACTIVATION_SUCCESS',modalMessage:{header:'Account has been set up',text:'Account activated successfully, please login'}});
@@ -77,7 +77,7 @@ export const activation = (token) => async(dispatch) => {
 
 export const logout = (navigation) => async(dispatch) => {
   try {
-    dispatch({type:'REGIST_PENDING'})
+    dispatch({type:'AUTH_PENDING'})
     dispatch({type:"DELETE_TOKEN"})
     navigation.navigate('Login')
   } catch (error) {
@@ -87,7 +87,7 @@ export const logout = (navigation) => async(dispatch) => {
 
 export const updateUser = (userId,inputData,token,navigation) => async(dispatch) => {
   try {
-    dispatch({type:'REGIST_PENDING'})
+    dispatch({type:'AUTH_PENDING'})
     const response = await axios.put(url+'/user/edit/'+userId,inputData,{
       headers:{
         Authorization:`Bearer ${token}`,

@@ -2,7 +2,7 @@ const initialState = {
   user: {},
   accessToken: null,
   refreshToken:null,
-  isLoading:false,
+  isLoadingAuth:false,
   isError:false,
   error:null,
   showModal:false,
@@ -11,10 +11,10 @@ const initialState = {
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'LOGIN_PENDING' || 'REGIST_PENDING':
-      console.log('loading...')
+    case 'AUTH_PENDING':
+      // console.log('loading...')
       return {
-        ...state,isLoading:true
+        ...state,isLoadingAuth:true
       }
     case 'LOGIN_SUCCESS':
       console.log(action)
@@ -23,7 +23,7 @@ export const authReducer = (state = initialState, action) => {
         user: action.payload.user,
         accessToken : action.payload.accessToken,
         refreshToken: action.payload.refreshToken,
-        isLoading:false
+        isLoadingAuth:false
       }
     case 'LOGIN_FAILED':
       // console.log(error,'ini error')
@@ -33,7 +33,7 @@ export const authReducer = (state = initialState, action) => {
         isError:true,
         showModal:true,
         modalMessage:action.error.message,
-        isLoading:false
+        isLoadingAuth:false
       }
     case 'REGIST_SUCCESS':
       console.log(action)
@@ -44,23 +44,23 @@ export const authReducer = (state = initialState, action) => {
         refreshToken: action.payload.refreshToken,
         showModal:true,
         modalMessage:action.modalMessage,
-        isLoading:false
+        isLoadingAuth:false
       }
     case 'REGIST_FAILED':
       // console.log(action.modalMessage,action.error)
       return {
-        ...state,error:action.error,isError:true,user:null,isLoading:false,
+        ...state,error:action.error,isError:true,user:null,isLoadingAuth:false,
         showModal: true,modalMessage:action.modalMessage,
       }
     case 'ACTIVATION_SUCCESS':
       return {
         ...state,showModal:true,modalMessage: action.modalMessage,
-        isLoading:false
+        isLoadingAuth:false
       }
       case 'PENDING':
       console.log('loading...')
       return {
-        ...state,isLoading:true
+        ...state,isLoadingAuth:true
       }
     case 'UPDATE_USER_SUCCESS':
       // console.log(action.payload)
@@ -68,7 +68,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload,
-        isLoading:false
+        isLoadingAuth:false
       }
     case 'UPDATE_USER_FAILED':
       // console.log(action.error)
@@ -78,7 +78,7 @@ export const authReducer = (state = initialState, action) => {
         isError:true,
         showModal:true,
         modalMessage:action.modalMessage,
-        isLoading:false
+        isLoadingAuth:false
       }
     case 'CLOSE_MODAL':
       return {
@@ -88,7 +88,7 @@ export const authReducer = (state = initialState, action) => {
         return{
             ...state,
             user:null,
-            isLoading:false,
+            isLoadingAuth:false,
             isError:false,
             accessToken:null
         }

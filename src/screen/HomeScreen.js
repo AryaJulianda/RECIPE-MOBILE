@@ -1,85 +1,53 @@
-import { View, Text, TextInput, Button, StyleSheet ,TouchableOpacity, Image, ImageBackground,ScrollView} from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet ,TouchableOpacity, Image, ImageBackground,ScrollView, RefreshControl} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient'; 
 import { styles } from '../styles/homeStyle';
 import { Images } from '../../assets/images';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getLatestRecipes } from '../storage/actions/recipeAction';
+import { useEffect, useState } from 'react';
+import { getAllRecipes, getHomePageRecipes, getLatestRecipes, getPopularRecipes } from '../storage/actions/recipeAction';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import NewRecipesScreen from './NewRecipesScreen.js'
 import Slider from '../components/Slider';
 import LoadingAnimation from '../components/LoadingAnimation';
+import RecommendationRecipesScreen from './RecommendationRecipesScreen';
+import PopularRecipesScreen from './PopularRecipesScreen';
 const HomeStack = createStackNavigator();
 
 const HomeScreenNav = ({navigation}) => {
   
   const dispatch = useDispatch()
-  const {latestRecipes,isLoading} = useSelector((s)=>s.recipes)
-  
+  const {latestRecipes,popularRecipes,homePageRecipes,recipes,isLoading} = useSelector((s)=>s.recipes)
+  const [refreshing, setRefreshing] = useState(false);
+
   useEffect(()=> {
-    dispatch(getLatestRecipes())
+    dispatch(getHomePageRecipes())
+    dispatch(getAllRecipes(undefined, 1, 5,undefined))
     // console.log('ini recipes',recipes)
   },[])
   
-  // console.log(latestRecipes)
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await dispatch(getHomePageRecipes())
+    await dispatch(getAllRecipes())
+    setRefreshing(false);
+  };
 
   return (
     <>{isLoading===true ? <LoadingAnimation/> : 
-    <ScrollView style={{backgroundColor:"#fff"}}>
+    <ScrollView style={{backgroundColor:"#fff"}}
+    refreshControl={
+      <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+    }>
       <View style={styles.searchField}>
         <Image source={Images.search} style={{width:20,height:20}}/>
         <TextInput placeholder='Search recipes in here' maxLength={40} style={styles.textInput} onPressIn={()=> navigation.navigate('Search')} />
       </View>
 
       <View>
-        {/* Popular Recipe */}
-        <View style={{marginBottom:20}}>
-          <Text style={styles.h1}>Popular Recipes</Text>
-          {/* <Text style={styles.h3}>Popular check</Text> */}
-          
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} > 
-            <View style={{ display:'flex',flexDirection: 'row',paddingHorizontal:20}}>
-              
-              <View style={styles.cardPopular}>
-                <ImageBackground source={Images.burger} style={styles.imageCard} imageStyle={{ borderRadius: 10 }}>
-                  <LinearGradient colors={['transparent', 'rgba(0, 0, 0, 0.5)']}style={styles.gradient}>
-                    <Text style={styles.titleCard}>Sandwich With Egg</Text>
-                  </LinearGradient>
-                </ImageBackground>
-              </View>
-              <View style={styles.cardPopular}>
-                <ImageBackground source={Images.burger} style={styles.imageCard} imageStyle={{ borderRadius: 10 }}>
-                  <LinearGradient colors={['transparent', 'rgba(0, 0, 0, 0.5)']}style={styles.gradient}>
-                    <Text style={styles.titleCard}>Sandwich With Egg</Text>
-                  </LinearGradient>
-                </ImageBackground>
-              </View>
-              <View style={styles.cardPopular}>
-                <ImageBackground source={Images.burger} style={styles.imageCard} imageStyle={{ borderRadius: 10 }}>
-                  <LinearGradient colors={['transparent', 'rgba(0, 0, 0, 0.5)']}style={styles.gradient}>
-                    <Text style={styles.titleCard}>Sandwich With Egg</Text>
-                  </LinearGradient>
-                </ImageBackground>
-              </View>
-              <View style={styles.cardPopular}>
-                <ImageBackground source={Images.burger} style={styles.imageCard} imageStyle={{ borderRadius: 10 }}>
-                  <LinearGradient colors={['transparent', 'rgba(0, 0, 0, 0.5)']}style={styles.gradient}>
-                    <Text style={styles.titleCard}>Sandwich With Egg</Text>
-                  </LinearGradient>
-                </ImageBackground>
-              </View>
-              <View style={styles.cardPopular}>
-                <ImageBackground source={Images.burger} style={styles.imageCard} imageStyle={{ borderRadius: 10 }}>
-                  <LinearGradient colors={['transparent', 'rgba(0, 0, 0, 0.5)']}style={styles.gradient}>
-                    <Text style={styles.titleCard}>Sandwich With Egg</Text>
-                  </LinearGradient>
-                </ImageBackground>
-              </View>
-
-            </View>
-          </ScrollView>
-        </View>
+        
+        {/* Popular Recipes */}
+        <Slider recipes={homePageRecipes.popular} header={'Popular Recipes'} navigate={()=> navigation.navigate('PopularRecipes')} navigation={navigation}/>
 
         {/* Category */}
         <View style={{marginBottom:20}}>
@@ -107,55 +75,13 @@ const HomeScreenNav = ({navigation}) => {
         </View>
 
         {/* New Recipes */}
-        <Slider recipes={latestRecipes} header={'New Recipes'} navigate={()=> navigation.navigate('NewRecipes')} navigation={navigation}/>
+        <Slider recipes={homePageRecipes.latest} header={'New Recipes'} navigate={()=> navigation.navigate('NewRecipes')} navigation={navigation}/>
+        
+       {/* Recomendation Recipe */}
+       <Slider recipes={recipes} header={'Recomendation Recipes'} navigate={()=> navigation.navigate('RecommendationRecipes')} navigation={navigation}/>
 
-        {/* Most Liked */}
-        <View style={{marginBottom:20}}>
-          <Text style={styles.h1}>Most Liked Recipes</Text>
-          {/* <Text style={styles.h3}>Popular check</Text> */}
-          
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} > 
-            <View style={{ flexDirection: 'row',paddingHorizontal:20,gap:10}}>
-              
-              <View style={styles.cardPopular}>
-                <ImageBackground source={Images.burger} style={styles.imageCard} imageStyle={{ borderRadius: 10 }}>
-                  <LinearGradient colors={['transparent', 'rgba(0, 0, 0, 0.5)']}style={styles.gradient}>
-                    <Text style={styles.titleCard}>Sandwich With Egg</Text>
-                  </LinearGradient>
-                </ImageBackground>
-              </View>
-              <View style={styles.cardPopular}>
-                <ImageBackground source={Images.burger} style={styles.imageCard} imageStyle={{ borderRadius: 10 }}>
-                  <LinearGradient colors={['transparent', 'rgba(0, 0, 0, 0.5)']}style={styles.gradient}>
-                    <Text style={styles.titleCard}>Sandwich With Egg</Text>
-                  </LinearGradient>
-                </ImageBackground>
-              </View>
-              <View style={styles.cardPopular}>
-                <ImageBackground source={Images.burger} style={styles.imageCard} imageStyle={{ borderRadius: 10 }}>
-                  <LinearGradient colors={['transparent', 'rgba(0, 0, 0, 0.5)']}style={styles.gradient}>
-                    <Text style={styles.titleCard}>Sandwich With Egg</Text>
-                  </LinearGradient>
-                </ImageBackground>
-              </View>
-              <View style={styles.cardPopular}>
-                <ImageBackground source={Images.burger} style={styles.imageCard} imageStyle={{ borderRadius: 10 }}>
-                  <LinearGradient colors={['transparent', 'rgba(0, 0, 0, 0.5)']}style={styles.gradient}>
-                    <Text style={styles.titleCard}>Sandwich With Egg</Text>
-                  </LinearGradient>
-                </ImageBackground>
-              </View>
-              <View style={styles.cardPopular}>
-                <ImageBackground source={Images.burger} style={styles.imageCard} imageStyle={{ borderRadius: 10 }}>
-                  <LinearGradient colors={['transparent', 'rgba(0, 0, 0, 0.5)']}style={styles.gradient}>
-                    <Text style={styles.titleCard}>Sandwich With Egg</Text>
-                  </LinearGradient>
-                </ImageBackground>
-              </View>
 
-            </View>
-          </ScrollView>
-        </View>
+
       </View>
       
     </ScrollView>}
@@ -173,6 +99,14 @@ const HomeScreen = ({navigation}) => {
       <HomeStack.Screen
         name="NewRecipes"
         component={NewRecipesScreen}
+      />
+      <HomeStack.Screen
+        name="RecommendationRecipes"
+        component={RecommendationRecipesScreen}
+      />
+      <HomeStack.Screen
+        name="PopularRecipes"
+        component={PopularRecipesScreen}
       />
     </HomeStack.Navigator>
   )

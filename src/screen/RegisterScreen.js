@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet ,TouchableOpacity, Image, ImageBackground} from 'react-native';
 import {Images} from '../../assets/images'
 import {styles} from '../styles/authStyle'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { regist } from '../storage/actions/authAction';
 import {Popup} from 'react-native-popup-confirm-toast'
+import LoadingAnimation from '../components/LoadingAnimation';
 
 function RegisterScreen({ navigation }) {
   const dispatch = useDispatch()
+  const {isLoadingAuth} = useSelector((s)=>s.auth)
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -72,11 +74,7 @@ function RegisterScreen({ navigation }) {
 
   return (
     <>
-
-    
-      {/* <View style={styles.hero}>
-        <ImageBackground source={Images.hero} style={{flex: 1,width:'100%',height:'auto'}}/>
-      </View>  */}
+    {isLoadingAuth==true ? <LoadingAnimation/> :
       <View style={styles.container} >
         
         <Text style={styles.h1}>Wellcome !</Text>
@@ -129,6 +127,7 @@ function RegisterScreen({ navigation }) {
         </TouchableOpacity>
         <Text onPress={() => navigation.navigate('Login')} style={styles.singUp}>Have an account? <Text style={{color:'#EFC81A'}}>Sing In</Text></Text>
       </View>
+      }
     </> 
   );
 }

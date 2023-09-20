@@ -44,6 +44,18 @@ export const getAllRecipesById = () => {
     };
 };
 
+export const getHomePageRecipes = () => {
+    return async(dispatch) => {
+        try {
+          dispatch({type:'PENDING'})
+          const res = await axios.get(`${serverUrl}/recipe/home/get`)
+          dispatch({type:'GET_HOMEPAGE_RECIPES_SUCCESS',payload:res.data.data});
+        }catch(err){
+          dispatch({type:'GET_HOMEPAGE_RECIPES_FAILED',error:err})
+        }
+    };
+};
+
 export const getLatestRecipes = () => {
     return async(dispatch) => {
         try {
@@ -51,7 +63,19 @@ export const getLatestRecipes = () => {
           const res = await axios.get(`${serverUrl}/recipe/latest/get`)
           dispatch({type:'GET_LATEST_RECIPES_SUCCESS',payload:res.data.data});
         }catch(err){
-          dispatch({type:'GET_LATEST_RECIPES_FAILED',error:err.message})
+          dispatch({type:'GET_LATEST_RECIPES_FAILED',error:err})
+        }
+    };
+};
+
+export const getPopularRecipes = () => {
+    return async(dispatch) => {
+        try {
+          dispatch({type:'PENDING'})
+          const res = await axios.get(`${serverUrl}/recipe/popular/get`)
+          dispatch({type:'GET_POPULAR_RECIPES_SUCCESS',payload:res.data.data});
+        }catch(err){
+          dispatch({type:'GET_POPULAR_RECIPES_FAILED',error:err})
         }
     };
 };
