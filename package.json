@@ -14,7 +14,7 @@
     "apk": "cd android && gradlew assembleRelease -x bundleReleaseJsAndAssets",
     "aab": "cd android && gradlew bundleRelease",
     "both": "cd android && gradlew assembleRelease bundleRelease -x bundleReleaseJsAndAssets",
-    "assetsBundle":" react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
+    "assetsBundle": " react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.19.3",
@@ -37,6 +37,7 @@
     "react-native-splash-screen": "^3.3.0",
     "react-native-toast-message": "^2.1.6",
     "react-redux": "^8.1.2",
+    "readme-md-generator": "^1.0.0",
     "redux": "^4.2.1",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
