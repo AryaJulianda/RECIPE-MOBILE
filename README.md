@@ -18,17 +18,48 @@ Before going to the installation stage there are some software that must be inst
 * JDK
 * Android Studio
 
+## Back-end
+The back end of this project is a REST-API created in Express JS. You can find it [here](https://github.com/AryaJulianda/RECIPE-APP-API)
+
+## Environtment
+Create .env file in your root project folder
+```
+BASE_URL=(base url or back-end url)
+```
+
 ## Install
 
-```sh
+```
 npm install
 ```
 
 ## Usage
 To start on android :
-```sh
+```
 npm run android
 ```
+## Screen Shoot
+
+### Splash Screen
+![Splash Screen](./demo/SplashScreen.jpg)
+### Login
+![Login](./demo/Login.jpg)
+### Register
+![Register](./demo/Register.jpg)
+### Home Screen
+![Home Screen](./demo/HomeScreen.jpg)
+### Popular
+![Popular](./demo/PopularRecipes.jpg)
+### Search Recipe
+![Search Recipe](./demo/SearchRecipe.jpg)
+### Profile
+![Profile](./demo/MyProfile.jpg)
+### Edit Profille
+![Edit Profile](./demo/EditProfile.jpg)
+### My Recipes
+![My Recipes](./demo/MyRecipes.jpg)
+### Add Recipe
+![Add Recipe](./demo/AddRecipe.jpg)
 
 ## Author
 
