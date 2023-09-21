@@ -41,7 +41,7 @@ npm run android
 ## Screen Shoot
 
 ### Splash Screen
-![Splash Screen](./demo/SplashScreen.jpg)
+![Splash Screen](./demo/SplashScreen.jpg =300x200)
 ### Login
 ![Login](./demo/Login.jpg)
 ### Register
