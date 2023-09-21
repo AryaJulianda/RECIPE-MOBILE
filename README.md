@@ -18,22 +18,22 @@ Before going to the installation stage there are some software that must be inst
 * JDK
 * Android Studio
 
-## Back-end
-The back end of this project is a REST-API created in Express JS. You can find it [here](https://github.com/AryaJulianda/RECIPE-APP-API)
+### Back-end
+The back end of this project is a REST-API created in Express JS. You can find it [here](https://github.com/AryaJulianda/RECIPE-BE)
 
-## Environtment
+### Environtment
 Create .env file in your root project folder
 ```
 BASE_URL=(base url or back-end url)
 ```
 
-## Install
+### Install
 
 ```
 npm install
 ```
 
-## Usage
+### Usage
 To start on android :
 ```
 npm run android
@@ -61,14 +61,32 @@ npm run android
 ### Add Recipe
 ![Add Recipe](./demo/AddRecipe.jpg)
 
-## Author
+<!-- CONTRIBUTING -->
+### Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b your/branch`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/yourbranch`)
+5. Open a Pull Request
+
+
+
+<!-- RELATED PROJECT -->
+### Related Project
+* [`Mama Recipe BE`](https://github.com/AryaJulianda/RECIPE-BE)
+
+
+### Author
 
 👤 **Arya Julianda**
 
 * Github: [@AryaJulianda](https://github.com/AryaJulianda)
 * LinkedIn: [@Arya Julianda](https://www.linkedin.com/in/aryajulianda)
 
-## Show your support
+### Show your support
 
 Give a ⭐️ if this project helped you!
 
