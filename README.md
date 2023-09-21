@@ -41,7 +41,7 @@ npm run android
 ## Screen Shoot
 
 ### Splash Screen
-<img src="./demo/SplashScreen.jpg" width="300"/>
+<img src="./demo/SplashScreen.jpg" width="300" display='inline-block'/>
 ### Login
 <img src="./demo/Login.jpg" width="300"/>
 ### Register
