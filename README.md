@@ -2,7 +2,14 @@
 
 > Mama Recipe Mobile is a mobile application that serves as a source of captivating food recipes. Within this app, users can discover delectable recipes shared by others and also contribute their own culinary creations. Mama Recipe Mobile is meticulously crafted using React Native technology, ensuring a seamless and engaging culinary experience for all.
 
-### ✨ Demo : [Link download apk](https://drive.google.com/file/d/14bAokfdIPskXIEB8BPI4Rc6DlL7oXywE/view?usp=drive_link)
+### ✨ Demo : [Link download apk](https://drive.google.com/file/d/1_UpJDTweJPkj1J9Xd6OxKIxOJWSf5KCG/view?usp=drive_link)
+
+## User Acount
+You can use your active email account to register, but if you experience problems during registration such as not getting the verification link then use this tester account
+```
+email : Nico@gmail.com
+password: Nico
+```
 
 ## Build with
 This app was built with some technologies below:
@@ -38,28 +45,30 @@ To start on android :
 ```
 npm run android
 ```
+
+
 ## Screen Shoot
 
-### Splash Screen
-![Splash Screen](./demo/SplashScreen.jpg)
-### Login
-![Login](./demo/Login.jpg)
-### Register
-![Register](./demo/Register.jpg)
-### Home Screen
-![Home Screen](./demo/HomeScreen.jpg)
-### Popular
-![Popular](./demo/PopularRecipes.jpg)
-### Search Recipe
-![Search Recipe](./demo/SearchRecipe.jpg)
-### Profile
-![Profile](./demo/MyProfile.jpg)
-### Edit Profille
-![Edit Profile](./demo/EditProfile.jpg)
-### My Recipes
-![My Recipes](./demo/MyRecipes.jpg)
-### Add Recipe
-![Add Recipe](./demo/AddRecipe.jpg)
+<h3>Splash Screen</h3>
+<img src="./demo/SplashScreen.jpg" width="300" display='inline-block'>
+<h3>Login</h3>
+<img src="./demo/Login.jpg" width="300">
+<h3>Register</h3>
+<img src="./demo/Register.jpg" width="300">
+<h3>Home Screen</h3>
+<img src="./demo/HomeScreen.jpg" width="300">
+<h3>Popular</h3>
+<img src="./demo/PopularRecipes.jpg" width="300">
+<h3>Search Recipe</h3>
+<img src="./demo/SearchRecipe.jpg" width="300">
+<h3>Profile</h3>
+<img src="./demo/MyProfile.jpg" width="300">
+<h3>Edit Profille</h3>
+<img src="./demo/EditProfile.jpg" width="300">
+<h3>My Recipes</h3>
+<img src="./demo/MyRecipes.jpg" width="300">
+<h3>Add Recipe</h3>
+<img src="./demo/AddRecipe.jpg" width="300">
 
 <!-- CONTRIBUTING -->
 ### Contributing
