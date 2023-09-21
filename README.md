@@ -40,25 +40,25 @@ npm run android
 ```
 ## Screen Shoot
 
-### Splash Screen
+<h3>Splash Screen</h3>
 <img src="./demo/SplashScreen.jpg" width="300" display='inline-block'>
-### Login
+<h3>Login</h3>
 <img src="./demo/Login.jpg" width="300">
-### Register
+<h3>Register</h3>
 <img src="./demo/Register.jpg" width="300">
-### Home Screen
+<h3>Home Screen</h3>
 <img src="./demo/HomeScreen.jpg" width="300">
-### Popular
+<h3>Popular</h3>
 <img src="./demo/PopularRecipes.jpg" width="300">
-### Search Recipe
+<h3>Search Recipe</h3>
 <img src="./demo/SearchRecipe.jpg" width="300">
-### Profile
+<h3>Profile</h3>
 <img src="./demo/MyProfile.jpg" width="300">
-### Edit Profille
+<h3>Edit Profille</h3>
 <img src="./demo/EditProfile.jpg" width="300">
-### My Recipes
+<h3>My Recipes</h3>
 <img src="./demo/MyRecipes.jpg" width="300">
-### Add Recipe
+<h3>Add Recipe</h3>
 <img src="./demo/AddRecipe.jpg" width="300">
 
 ## Author
