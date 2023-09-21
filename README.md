@@ -41,26 +41,26 @@ npm run android
 ## Screen Shoot
 
 ### Splash Screen
-<img src="./demo/SplashScreen.jpg" width="30"/>
-![Splash Screen|320x271,50%](./demo/SplashScreen.jpg)
+<img src="./demo/SplashScreen.jpg" width="400"/>
 ### Login
-![Login](./demo/Login.jpg)
+<img src="./demo/Login.jpg" width="400"/>
 ### Register
-![Register](./demo/Register.jpg)
+<img src="./demo/Register.jpg" width="400"/>
 ### Home Screen
-![Home Screen](./demo/HomeScreen.jpg)
+<img src="./demo/HomeScreen.jpg" width="400"/>
 ### Popular
-![Popular](./demo/PopularRecipes.jpg)
+<img src="./demo/PopularRecipes.jpg" width="400"/>
 ### Search Recipe
-![Search Recipe](./demo/SearchRecipe.jpg)
+<img src="./demo/SearchRecipe.jpg" width="400"/>
 ### Profile
-![Profile](./demo/MyProfile.jpg)
+<img src="./demo/MyProfile.jpg" width="400"/>
 ### Edit Profille
-![Edit Profile](./demo/EditProfile.jpg)
+<img src="./demo/EditProfile.jpg" width="400"/>
 ### My Recipes
 ![My Recipes](./demo/MyRecipes.jpg)
+<img src="./demo/MyRecipes.jpg" width="400"/>
 ### Add Recipe
-![Add Recipe](./demo/AddRecipe.jpg)
+<img src="./demo/AddRecipes.jpg" width="400"/>
 
 ## Author
 
