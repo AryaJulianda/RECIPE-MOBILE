@@ -41,7 +41,7 @@ npm run android
 ## Screen Shoot
 
 ### Splash Screen
-<img src="./demo/SplashScreen.jpg" width="300">
+<img src="./demo/SplashScreen.jpg" width="300"/>
 ![Splash Screen|320x271,50%](./demo/SplashScreen.jpg)
 ### Login
 ![Login](./demo/Login.jpg)
