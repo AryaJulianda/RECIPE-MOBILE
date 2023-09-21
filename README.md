@@ -41,7 +41,7 @@ npm run android
 ## Screen Shoot
 
 ### Splash Screen
-![img|320x271,50%](https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png)
+<img src="./demo/SplashScreen.jpg" width="300">
 ![Splash Screen|320x271,50%](./demo/SplashScreen.jpg)
 ### Login
 ![Login](./demo/Login.jpg)
