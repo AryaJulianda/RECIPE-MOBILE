@@ -57,7 +57,6 @@ npm run android
 ### Edit Profille
 <img src="./demo/EditProfile.jpg" width="300"/>
 ### My Recipes
-![My Recipes](./demo/MyRecipes.jpg)
 <img src="./demo/MyRecipes.jpg" width="300"/>
 ### Add Recipe
 <img src="./demo/AddRecipes.jpg" width="300"/>
