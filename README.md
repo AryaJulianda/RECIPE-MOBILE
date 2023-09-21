@@ -59,7 +59,7 @@ npm run android
 ### My Recipes
 <img src="./demo/MyRecipes.jpg" width="300"/>
 ### Add Recipe
-<img src="./demo/AddRecipes.jpg" width="300"/>
+<img src="./demo/AddRecipe.jpg" width="300"/>
 
 ## Author
 
