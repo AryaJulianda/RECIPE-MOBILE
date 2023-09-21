@@ -41,26 +41,26 @@ npm run android
 ## Screen Shoot
 
 ### Splash Screen
-<img src="./demo/SplashScreen.jpg" width="400"/>
+<img src="./demo/SplashScreen.jpg" width="300"/>
 ### Login
-<img src="./demo/Login.jpg" width="400"/>
+<img src="./demo/Login.jpg" width="300"/>
 ### Register
-<img src="./demo/Register.jpg" width="400"/>
+<img src="./demo/Register.jpg" width="300"/>
 ### Home Screen
-<img src="./demo/HomeScreen.jpg" width="400"/>
+<img src="./demo/HomeScreen.jpg" width="300"/>
 ### Popular
-<img src="./demo/PopularRecipes.jpg" width="400"/>
+<img src="./demo/PopularRecipes.jpg" width="300"/>
 ### Search Recipe
-<img src="./demo/SearchRecipe.jpg" width="400"/>
+<img src="./demo/SearchRecipe.jpg" width="300"/>
 ### Profile
-<img src="./demo/MyProfile.jpg" width="400"/>
+<img src="./demo/MyProfile.jpg" width="300"/>
 ### Edit Profille
-<img src="./demo/EditProfile.jpg" width="400"/>
+<img src="./demo/EditProfile.jpg" width="300"/>
 ### My Recipes
 ![My Recipes](./demo/MyRecipes.jpg)
-<img src="./demo/MyRecipes.jpg" width="400"/>
+<img src="./demo/MyRecipes.jpg" width="300"/>
 ### Add Recipe
-<img src="./demo/AddRecipes.jpg" width="400"/>
+<img src="./demo/AddRecipes.jpg" width="300"/>
 
 ## Author
 
