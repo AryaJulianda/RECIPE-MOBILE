@@ -4,6 +4,13 @@
 
 ### ✨ Demo : [Link download apk](https://drive.google.com/file/d/1_UpJDTweJPkj1J9Xd6OxKIxOJWSf5KCG/view?usp=drive_link)
 
+## User Acount
+You can use your active email account to register, but if you experience problems during registration such as not getting the verification link then use this tester account
+```
+email : Nico@gmail.com
+password: Nico
+```
+
 ## Build with
 This app was built with some technologies below:
 * React Native
@@ -38,6 +45,8 @@ To start on android :
 ```
 npm run android
 ```
+
+
 ## Screen Shoot
 
 <h3>Splash Screen</h3>
