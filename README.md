@@ -4,14 +4,14 @@
 
 ### ✨ Demo : [Link download apk](https://drive.google.com/file/d/1_UpJDTweJPkj1J9Xd6OxKIxOJWSf5KCG/view?usp=drive_link)
 
-## User Acount
+## 🧑 User Acount
 You can use your active email account to register, but if you experience problems during registration such as not getting the verification link then use this tester account
 ```
 email : Nico@gmail.com
 password: Nico
 ```
 
-## Build with
+## 🛠 Build with
 This app was built with some technologies below:
 * React Native
 * Javascript
@@ -19,7 +19,7 @@ This app was built with some technologies below:
 * Redux
 * CSS
 
-## Getting Started
+## 🔥 Getting Started
 Before going to the installation stage there are some software that must be installed first
 * Node JS
 * JDK
@@ -47,7 +47,7 @@ npm run android
 ```
 
 
-## Screen Shoot
+## 📸 Screen Shoot
 
 <h3>Splash Screen</h3>
 <img src="./demo/SplashScreen.jpg" width="300" display='inline-block'>
@@ -71,7 +71,7 @@ npm run android
 <img src="./demo/AddRecipe.jpg" width="300">
 
 <!-- CONTRIBUTING -->
-### Contributing
+### 🍻 Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -84,13 +84,13 @@ Contributions are what make the open source community such an amazing place to b
 
 
 <!-- RELATED PROJECT -->
-### Related Project
+### 🚀 Related Project
 * [`Mama Recipe BE`](https://github.com/AryaJulianda/RECIPE-BE)
 
 
-### Author
+### 🤖 Author
 
-👤 **Arya Julianda**
+ **Arya Julianda**
 
 * Github: [@AryaJulianda](https://github.com/AryaJulianda)
 * LinkedIn: [@Arya Julianda](https://www.linkedin.com/in/aryajulianda)
