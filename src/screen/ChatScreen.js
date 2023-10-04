@@ -3,8 +3,8 @@ import { View, Text, TextInput, Button, StyleSheet ,TouchableOpacity, Image, Ima
 const ChatScreen = () => {
   return (
 
-      <View>
-        <Text style={{fontFamily:''}}>ChatScreen</Text>
+      <View style={{width:"100%",height:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}>
+        <Text style={{fontFamily:'Poppins-Medium'}}>This Page is Under Constructions</Text>
       </View>
 
   )

@@ -28,16 +28,16 @@ export const login = (inputData,navigation) => async(dispatch) => {
   }
 }
 
-export const regist = (inputData,Popup) => async(dispatch) => {
+export const regist = (inputData,Popup,navigation) => async(dispatch) => {
   try {
     dispatch({type:'AUTH_PENDING'})
     const response = await axios.post(url+`/auth/register`,inputData);
     console.log('regist success',inputData);
-    dispatch({type:'REGIST_SUCCESS',payload:response.data,modalMessage:{header:'You are all set!',text:'Please check your email account for verification'}});
+    dispatch({type:'REGIST_SUCCESS',payload:response.data,modalMessage:{header:'You are all set!',text:'Please login'}});
     Popup.show({
       type: 'success',
       title: 'You are all set!',
-      textBody: 'Please check your email account for verification',
+      textBody: 'Please login',
       buttonText: 'OK',
       callback: () => Popup.hide(),
       okButtonStyle:{backgroundColor:'#eec302'},
@@ -45,7 +45,7 @@ export const regist = (inputData,Popup) => async(dispatch) => {
       titleTextStyle:{fontFamily:'Poppins-Bold',color:'#999',marginBottom:0},
       descTextStyle:{fontFamily:'Poppins-Medium',color:'#999',marginBottom:0},
     })
-    // navigate('/');
+    navigation.navigate("Login");
   } catch (error) {
     console.log('regist failed',inputData,error)
     dispatch({type:'REGIST_FAILED',error:error.response.data.message,modalMessage:{header:'Regist failed!',text:error.response.data.message}});

@@ -57,11 +57,6 @@ export const authReducer = (state = initialState, action) => {
         ...state,showModal:true,modalMessage: action.modalMessage,
         isLoadingAuth:false
       }
-      case 'PENDING':
-      console.log('loading...')
-      return {
-        ...state,isLoadingAuth:true
-      }
     case 'UPDATE_USER_SUCCESS':
       // console.log(action.payload)
       console.log('update success')

@@ -68,13 +68,13 @@ function RegisterScreen({ navigation }) {
 
   const handleSubmit = () => {
     if (isFormValid()) {
-      dispatch(regist(inputData, Popup));
+      dispatch(regist(inputData, Popup,navigation));
     }
   };
 
   return (
     <>
-    {/* {isLoadingAuth==true ? <LoadingAnimation/> : */}
+    {isLoadingAuth==true ? <LoadingAnimation/> :
       <View style={styles.container} >
         
         <Text style={styles.h1}>Wellcome !</Text>
@@ -127,7 +127,7 @@ function RegisterScreen({ navigation }) {
         </TouchableOpacity>
         <Text onPress={() => navigation.navigate('Login')} style={styles.singUp}>Have an account? <Text style={{color:'#EFC81A'}}>Sing In</Text></Text>
       </View>
-      {/* } */}
+    } 
     </> 
   );
 }

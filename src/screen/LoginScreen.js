@@ -35,7 +35,7 @@ function LoginScreen({ navigation }) {
 
   return (
     <>
-    {/* {isLoadingAuth==true ? <LoadingAnimation/> : */}
+    {isLoadingAuth==true ? <LoadingAnimation/> :
       <View style={styles.container} >
         
         <Text style={styles.h1}>Wellcome !</Text>
@@ -76,7 +76,7 @@ function LoginScreen({ navigation }) {
         </TouchableOpacity>
         <Text onPress={() => navigation.navigate('Register')} style={styles.singUp}>Don't have an account? <Text style={{color:'#EFC81A'}}>Sing up</Text></Text>
       </View>
-    {/* } */}
+    } 
     </> 
   );
 }

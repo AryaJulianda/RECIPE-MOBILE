@@ -162,7 +162,7 @@ const EditProfileScreen = ({navigation}) => {
 
   return (
     <>
-      {/* {isLoadingAuth==true ? <LoadingAnimation/> : */}
+      {isLoadingAuth==true ? <LoadingAnimation/> :
       <View style={{backgroundColor:'white',width:'100%',height:'100%',display:'flex',alignItems:'center'}} >
         
         <View style={{backgroundColor:'#EEC302',display:'flex',justifyContent:'center',alignItems:'center',paddingVertical:40,gap:10,width:'100%'}} >
@@ -209,7 +209,7 @@ const EditProfileScreen = ({navigation}) => {
         </View>
 
       </View>
-    {/* }   */}
+   }   
 
     </>
   )
