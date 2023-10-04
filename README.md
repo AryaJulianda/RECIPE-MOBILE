@@ -2,10 +2,10 @@
 
 > Mama Recipe Mobile is a mobile application that serves as a source of captivating food recipes. Within this app, users can discover delectable recipes shared by others and also contribute their own culinary creations. Mama Recipe Mobile is meticulously crafted using React Native technology, ensuring a seamless and engaging culinary experience for all.
 
-### ✨ Demo : [Link download apk](https://drive.google.com/file/d/1_UpJDTweJPkj1J9Xd6OxKIxOJWSf5KCG/view?usp=drive_link)
+### ✨ Demo : [Link download apk](https://drive.google.com/file/d/11oLIUREuwpmQXxrp0-4_U7aZqRp3pp3q/view?usp=sharing)
 
 ## 🧑 User Acount
-You can use your active email account to register, but if you experience problems during registration such as not getting the verification link then use this tester account
+In Mama Recipe Mobile You can create your new acount. But if you want to use exist acount, please use this acount 
 ```
 email : Nico@gmail.com
 password: Nico
