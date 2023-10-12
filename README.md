@@ -61,6 +61,8 @@ npm run android
 <img src="./demo/PopularRecipes.jpg" width="300">
 <h3>Search Recipe</h3>
 <img src="./demo/SearchRecipe.jpg" width="300">
+<h3>Detail Recipe</h3>
+<img src="./demo/DetailRecipe.jpg" width="300">
 <h3>Profile</h3>
 <img src="./demo/MyProfile.jpg" width="300">
 <h3>Edit Profille</h3>
